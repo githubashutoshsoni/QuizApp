@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="wrap_content">
 
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        tools:text="Choice 1"
+    <RadioButton
         android:id="@+id/choice_chip"
-        style="@style/Widget.AppCompat.CompoundButton.CheckBox"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/radio_btn_bg"
+        android:button="@android:color/transparent"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button"
+        tools:text="Choice 1">
 
-    </CheckBox>
+    </RadioButton>
 
 
 </LinearLayout>

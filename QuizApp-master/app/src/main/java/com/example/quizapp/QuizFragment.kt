@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.quizapp.model.ResponseCategoryJson
 import com.example.quizapp.recycleradapters.OptionsAdapter
 import kotlinx.android.synthetic.main.fragment_quiz.view.*
@@ -49,8 +51,8 @@ class QuizFragment : Fragment() {
         QuizModel = activity!!.let { ViewModelProvider(it).get(QuizViewModel::class.java) }
         QuizModel.onNextItemClicked()
 
-        val linearLayoutManager = GridLayoutManager(context, 2);
-//        val linearLayoutManager = G(context);
+//        val linearLayoutManager = GridLayoutManager(context, 2);
+        val linearLayoutManager = LinearLayoutManager(context);
 
         view.apply {
 
@@ -82,6 +84,9 @@ class QuizFragment : Fragment() {
             })
 
 
+            QuizModel.completedQuiz.observe(activity!!, Observer {
+                findNavController().navigate(R.id.action_quizFragment_to_finalResult);
+            })
         }
 
         // Inflate the layout for this fragment

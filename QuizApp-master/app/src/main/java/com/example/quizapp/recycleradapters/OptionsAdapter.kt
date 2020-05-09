@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quizapp.R
 import kotlinx.android.synthetic.main.item_options_layout.view.*
@@ -46,7 +47,7 @@ class OptionsAdapter : RecyclerView.Adapter<OptionsAdapter.OptionsViewHolder>() 
 
     inner class OptionsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val checkBoxView = itemView.choice_chip
+        val checkBoxView: RadioButton = itemView.choice_chip
 
         init {
 

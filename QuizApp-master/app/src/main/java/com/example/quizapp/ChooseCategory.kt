@@ -2,9 +2,7 @@ package com.example.quizapp
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.annotation.ColorInt
 import androidx.core.content.res.ResourcesCompat
@@ -12,6 +10,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import com.example.quizapp.R2.attr.menu
 import com.example.quizapp.model.ResCategory
 import com.example.quizapp.model.ResponseCategoryJson
 import com.squareup.moshi.Moshi
@@ -36,6 +35,8 @@ class ChooseCategory : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
         val view = inflater.inflate(R.layout.fragment_choose_category, container, false)
 
         chooseCategoryViewModel = ViewModelProvider(activity!!).get(QuizViewModel::class.java)
@@ -68,15 +69,22 @@ class ChooseCategory : Fragment() {
                 }
             }
 
+
         }
+
+        setHasOptionsMenu(true)
 
 
         return view
     }
 
-    companion object {
-        const val QUIZ_KEY = "QUIZ_KEY"
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+
+        inflater.inflate(R.menu.main, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
+
 
     val TAG = ChooseCategory::class.java.simpleName
 

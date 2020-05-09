@@ -20,6 +20,9 @@ class QuizViewModel(application: Application) : AndroidViewModel(application) {
     private var _questionNumber: MutableLiveData<Int> =
         MutableLiveData(0)
 
+    private var _completedQuiz: MutableLiveData<Boolean> = MutableLiveData(false)
+
+    val completedQuiz: LiveData<Boolean> = _completedQuiz
 
     val questionNumber: LiveData<Int> = _questionNumber
 
@@ -37,13 +40,15 @@ class QuizViewModel(application: Application) : AndroidViewModel(application) {
 
     fun onNextItemClicked() {
         i++
-        _questionNumber.value = i+1
+        _questionNumber.value = i + 1
         if (quizItems.size > i) {
 
             Log.d(TAG, "Quesitoin is $quizItems[i].question ")
             _question.value = quizItems[i]
 
         } else {
+
+            _completedQuiz.value = true
             Log.d(TAG, " questions finished")
         }
 
