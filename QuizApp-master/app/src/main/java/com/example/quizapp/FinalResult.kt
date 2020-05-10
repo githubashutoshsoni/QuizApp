@@ -6,7 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
+import com.example.quizapp.model.ScoreModel
 import com.google.firebase.auth.FirebaseAuth
+import io.realm.Realm
+import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.fragment_final_result.view.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -39,6 +42,17 @@ class FinalResult : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_final_result, container, false)
         view.apply {
+
+
+            val realm = Realm.getDefaultInstance()
+            realm.beginTransaction()
+            val params = realm.where<ScoreModel>().findAll()
+            val score = params[params.size - 1]?.score
+            realm.commitTransaction()
+            realm.close()
+
+            total_score.text = "You scored a total of $score /10"
+
 
             log_out.setOnClickListener {
 

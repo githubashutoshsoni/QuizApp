@@ -14,9 +14,14 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.quizapp.model.ResponseCategoryJson
+import com.example.quizapp.model.ScoreModel
 import com.example.quizapp.recycleradapters.OptionsAdapter
 import com.google.firebase.auth.FirebaseAuth
+import io.realm.Realm
+import io.realm.kotlin.createObject
+import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.fragment_quiz.view.*
+import kotlin.random.Random
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,7 +34,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class QuizFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+
     private var quizObject: List<ResponseCategoryJson>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -114,6 +119,23 @@ class QuizFragment : Fragment() {
 
             QuizModel.completedQuiz.observe(activity!!, Observer {
                 if (it) {
+
+                    Realm.init(context)
+                    val realm = Realm.getDefaultInstance()
+                    realm.beginTransaction()
+
+
+                    val params = realm.createObject<ScoreModel>();
+                    params.score = correctCount
+                    realm.insertOrUpdate(params)
+                    realm.commitTransaction()
+                    realm.close()
+
+
+
+
+
+
                     findNavController().navigate(R.id.action_quizFragment_to_finalResult);
                     activity?.viewModelStore?.clear()
                 }

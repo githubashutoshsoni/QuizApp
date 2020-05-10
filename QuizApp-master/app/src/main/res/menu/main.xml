@@ -4,8 +4,8 @@
 
 
     <item
-        android:id="@+id/all_score"
-        android:title="All Score"
+        android:id="@+id/delete_all_score"
+        android:title="Delete All Score"
         app:showAsAction="never"></item>
 
     <item

@@ -5,23 +5,20 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.annotation.ColorInt
 import androidx.core.content.res.ResourcesCompat
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-import com.example.quizapp.R2.attr.menu
-import com.example.quizapp.model.ResCategory
 import com.example.quizapp.model.ResponseCategoryJson
+import com.example.quizapp.model.ScoreModel
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
+import io.realm.Realm
+import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.fragment_choose_category.view.*
-import kotlinx.android.synthetic.main.layout_list.*
 import kotlinx.android.synthetic.main.layout_list.view.*
 import org.json.JSONArray
 import org.json.JSONObject
@@ -128,7 +125,41 @@ class ChooseCategory : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            R.id.all_score -> Toast.makeText(context, "all scores", Toast.LENGTH_SHORT).show()
+            R.id.delete_all_score -> {
+
+                Realm.init(context)
+
+                val realm = Realm.getDefaultInstance()
+
+                realm.executeTransaction { realm ->
+                    run {
+
+                        val results = realm.where<ScoreModel>().findAll()
+
+                        if (results.size > 0) {
+                            val total = results.size
+                            val deleted = results.deleteAllFromRealm();
+                            Toast.makeText(
+                                context,
+                                "all scores count $total  deleted $deleted",
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
+                        } else {
+                            Toast.makeText(
+                                context,
+                                "0 deleted",
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
+                        }
+
+
+                    }
+                }
+
+
+            }
             R.id.log_out -> {
                 Toast.makeText(context, "Log out", Toast.LENGTH_SHORT).show()
                 FirebaseAuth.getInstance().signOut()
