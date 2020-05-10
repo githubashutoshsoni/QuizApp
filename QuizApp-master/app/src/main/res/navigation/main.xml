@@ -43,7 +43,9 @@
         tools:layout="@layout/fragment_final_result" >
         <action
             android:id="@+id/action_finalResult_to_chooseCategory"
-            app:destination="@id/chooseCategory" />
+            app:destination="@id/chooseCategory"
+            app:popUpTo="@id/chooseCategory"
+            app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_finalResult_to_signUpAndLogIn"
             app:destination="@id/signUpAndLogIn"

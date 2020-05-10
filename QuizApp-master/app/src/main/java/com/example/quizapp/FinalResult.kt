@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.fragment_final_result.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,6 +40,17 @@ class FinalResult : Fragment() {
         val view = inflater.inflate(R.layout.fragment_final_result, container, false)
         view.apply {
 
+            log_out.setOnClickListener {
+
+                FirebaseAuth.getInstance().signOut()
+                findNavController().navigate(R.id.action_finalResult_to_signUpAndLogIn)
+
+            }
+
+            again.setOnClickListener {
+                findNavController().navigate(R.id.action_finalResult_to_chooseCategory)
+
+            }
 
         }
         // Inflate the layout for this fragment

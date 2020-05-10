@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.quizapp.model.ResponseCategoryJson
 import com.example.quizapp.recycleradapters.OptionsAdapter
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_quiz.view.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -57,6 +58,9 @@ class QuizFragment : Fragment() {
         view.apply {
 
 
+            user_name.text = FirebaseAuth.getInstance().currentUser?.displayName ?: "Anonymous"
+
+
             QuizModel.questionNumber.observe(activity!!, Observer {
                 question_no.text = "Question No $it."
             })
@@ -85,7 +89,8 @@ class QuizFragment : Fragment() {
 
 
             QuizModel.completedQuiz.observe(activity!!, Observer {
-                findNavController().navigate(R.id.action_quizFragment_to_finalResult);
+                if (it)
+                    findNavController().navigate(R.id.action_quizFragment_to_finalResult);
             })
         }
 
