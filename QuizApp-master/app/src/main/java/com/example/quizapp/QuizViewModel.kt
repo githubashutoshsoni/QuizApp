@@ -49,10 +49,16 @@ class QuizViewModel(application: Application) : AndroidViewModel(application) {
         } else {
 
             _completedQuiz.value = true
+
             Log.d(TAG, " questions finished")
         }
 
 
+    }
+
+
+    fun setCompletedToFalse() {
+        _completedQuiz.value = false
     }
 
     val TAG = QuizViewModel::class.java.simpleName

@@ -35,6 +35,11 @@
         <action
             android:id="@+id/action_chooseCategory_to_quizFragment"
             app:destination="@id/quizFragment" />
+        <action
+            android:id="@+id/action_chooseCategory_to_signUpAndLogIn"
+            app:destination="@id/signUpAndLogIn"
+            app:popUpTo="@id/signUpAndLogIn"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/finalResult"
@@ -45,7 +50,7 @@
             android:id="@+id/action_finalResult_to_chooseCategory"
             app:destination="@id/chooseCategory"
             app:popUpTo="@id/chooseCategory"
-            app:popUpToInclusive="false" />
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_finalResult_to_signUpAndLogIn"
             app:destination="@id/signUpAndLogIn"

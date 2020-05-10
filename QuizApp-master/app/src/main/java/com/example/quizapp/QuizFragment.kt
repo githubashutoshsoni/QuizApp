@@ -1,10 +1,12 @@
 package com.example.quizapp
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -40,6 +42,16 @@ class QuizFragment : Fragment() {
 
     lateinit var QuizModel: QuizViewModel
 
+    fun getUserName(): String? {
+
+        val userName =
+            activity?.getPreferences(Context.MODE_PRIVATE)
+                ?.getString(resources.getString(R.string.user_name), "Anonymous");
+
+        return userName
+
+    }
+
     val TAG = QuizFragment::class.java.simpleName
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,7 +70,7 @@ class QuizFragment : Fragment() {
         view.apply {
 
 
-            user_name.text = FirebaseAuth.getInstance().currentUser?.displayName ?: "Anonymous"
+            user_name.text = getUserName()
 
 
             QuizModel.questionNumber.observe(activity!!, Observer {
@@ -66,22 +78,34 @@ class QuizFragment : Fragment() {
             })
 
 
+//            a
+
             val optionsAdapter = OptionsAdapter()
+            var correctAnswer: String = ""
+            var selectedAnswer: String = ""
+            var correctCount: Int = 0
 
             choice_recycler_view.adapter = optionsAdapter
             choice_recycler_view.layoutManager = linearLayoutManager
             optionsAdapter.onItemClick = {
+                selectedAnswer = it
                 Log.d(TAG, "String is $it");
             }
 
             next_question_btn.setOnClickListener {
+
+                if (correctAnswer == selectedAnswer)
+                    ++correctCount
+                else
+                    Toast.makeText(context, "correct answer is $correctAnswer", Toast.LENGTH_SHORT)
+                        .show()
                 QuizModel.onNextItemClicked()
             }
 
             QuizModel.question.observe(activity!!, Observer {
 
                 val question = it;
-
+                correctAnswer = question.correct_answer
                 question_text.text = question.question
                 optionsAdapter.setChoicelist(question.incorrect_answers)
 
@@ -89,8 +113,10 @@ class QuizFragment : Fragment() {
 
 
             QuizModel.completedQuiz.observe(activity!!, Observer {
-                if (it)
+                if (it) {
                     findNavController().navigate(R.id.action_quizFragment_to_finalResult);
+                    activity?.viewModelStore?.clear()
+                }
             })
         }
 

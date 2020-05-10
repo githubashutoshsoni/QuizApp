@@ -139,7 +139,8 @@ class SignUpAndLogIn : Fragment() {
 
 
         if (!getUserDetails().isNullOrEmpty()) {
-            Navigation.findNavController(globalView).navigate(R.id.action_signUpAndLogIn_to_chooseCategory);
+            Navigation.findNavController(globalView)
+                .navigate(R.id.action_signUpAndLogIn_to_chooseCategory);
         }
 
         val currentUser = auth.currentUser
@@ -193,7 +194,7 @@ class SignUpAndLogIn : Fragment() {
                 setUpSHaredPreference(it.displayName!!)
             }
 
-
+            Log.d(TAG, "Signin successful")
             // Signed in successfully, show authenticated UI.
 
         } catch (e: ApiException) {
@@ -213,6 +214,9 @@ class SignUpAndLogIn : Fragment() {
     }
 
     fun setUpSHaredPreference(user: String) {
+
+        Log.d(TAG, "set up shared preferences success $user ")
+
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
         with(sharedPref.edit()) {
             putString(getString(R.string.user_name), user)
@@ -225,9 +229,12 @@ class SignUpAndLogIn : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
+
+        Log.d(TAG, "Request code is $requestCode==$RC_SIGN_IN  Result code is $resultCode ")
         if (requestCode == RC_SIGN_IN) {
             // The Task returned from this call is always completed, no need to attach
             // a listener.
+            Log.d(TAG, "RC_SIGN_IN")
             val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
             handleSignInResult(task)
         }
