@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+
+        android:drawable="@drawable/radio_btn_bg"
+        android:state_active="true"
+        android:state_pressed="true"
+        android:state_enabled="true"
+        android:state_checked="true"
+        android:state_activated="true"
+        android:state_selected="true">
+
+    </item>
+
+    <item  android:state_checked="false" android:drawable="@color/colorSurface"></item>
+</selector>

@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">QuizApp</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="facebook_app_id">894393384417064</string>
+    <string name="fb_login_protocol_scheme">fb894393384417064</string>
+    <string name="user_name">user_name</string>
+    <string name="your_total_score_is_10_10">Your total score is 10/10</string>
+
+</resources>
