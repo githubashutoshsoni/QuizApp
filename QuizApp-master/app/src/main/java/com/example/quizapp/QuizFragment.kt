@@ -5,11 +5,16 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.annotation.Px
+import androidx.core.view.forEach
+import androidx.dynamicanimation.animation.SpringAnimation
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_DRAGGING
 import com.example.quizapp.model.ResponseCategoryJson
 import com.example.quizapp.model.ScoreModel
 import com.example.quizapp.recycleradapters.OptionsAdapter
@@ -17,8 +22,6 @@ import io.realm.Realm
 import io.realm.kotlin.createObject
 import kotlinx.android.synthetic.main.fragment_quiz.view.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
@@ -219,6 +222,14 @@ class QuizFragment : Fragment() {
             Log.d(TAG, "String is $it");
         }
 
+        view.choice_recycler_view.addOnScrollListener(
+            OscillatingScrollListener(
+
+                resources.getDimensionPixelSize(R.dimen.grid_2)
+
+            )
+        )
+
     }
 
 
@@ -231,6 +242,7 @@ class QuizFragment : Fragment() {
 
     }
 
+
     companion object {
 
         @JvmStatic
@@ -241,5 +253,33 @@ class QuizFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+
+}
+
+private const val MAX_OSCILLATION_ANGLE = 6f // ±6º
+
+class OscillatingScrollListener(
+    @Px private val scrollDistance: Int
+) : RecyclerView.OnScrollListener() {
+    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+        // Calculate a rotation to set from the horizontal scroll
+        val clampedDx = dx.coerceIn(-scrollDistance, scrollDistance)
+        val rotation = (clampedDx / scrollDistance) * MAX_OSCILLATION_ANGLE
+        recyclerView.forEach {
+            // Alter the pivot point based on scroll direction to make motion look more natural
+            it.pivotX = it.width / 2f + clampedDx / 3f
+            it.pivotY = it.height / 3f
+            it.spring(SpringAnimation.ROTATION).animateToFinalPosition(rotation)
+        }
+    }
+
+    override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+        if (newState != SCROLL_STATE_DRAGGING) {
+            recyclerView.forEach {
+                it.spring(SpringAnimation.ROTATION).animateToFinalPosition(0f)
+            }
+        }
     }
 }

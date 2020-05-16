@@ -1,6 +1,5 @@
 package com.example.quizapp
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -11,9 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import com.example.quizapp.PrefHelper.clearLoginDetails
 import com.example.quizapp.model.ResponseCategoryJson
 import com.example.quizapp.model.ScoreModel
-import com.google.firebase.auth.FirebaseAuth
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import io.realm.Realm
@@ -29,6 +28,22 @@ class ChooseCategory : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+    }
+
+
+    override fun onStart() {
+        super.onStart()
+
+        if (PrefHelper.getUserDetails(activity!!).isNullOrEmpty()) {
+
+
+
+            Navigation.findNavController(view!!)
+                .navigate(R.id.action_chooseCategory_to_signUpAndLogIn)
+
+        }
+
 
     }
 
@@ -154,23 +169,16 @@ class ChooseCategory : Fragment() {
 
             }
             R.id.log_out -> {
+
                 Toast.makeText(context, "Log out", Toast.LENGTH_SHORT).show()
-                FirebaseAuth.getInstance().signOut()
-                clearLoginDetails()
+
+                clearLoginDetails(activity!!)
                 findNavController().navigate(R.id.action_chooseCategory_to_signUpAndLogIn)
+
             }
         }
 
         return super.onOptionsItemSelected(item)
-    }
-
-
-    fun clearLoginDetails() {
-        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
-        with(sharedPref.edit()) {
-            putString(getString(R.string.user_name), null)
-            commit()
-        }
     }
 
 

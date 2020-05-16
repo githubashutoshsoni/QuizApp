@@ -10,12 +10,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.example.quizapp.PrefHelper.setUpSHaredPreference
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginResult
-import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -24,7 +24,6 @@ import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.fragment_sign_up_and_log_in.view.*
 
@@ -140,15 +139,6 @@ class SignUpAndLogIn : Fragment() {
         super.onStart()
 
 
-
-
-        if (!getUserDetails().isNullOrEmpty()) {
-            Navigation.findNavController(globalView)
-                .navigate(R.id.action_signUpAndLogIn_to_chooseCategory);
-        }
-
-        val currentUser = auth.currentUser
-        Log.d(tag, "Current user $currentUser")
     }
 
 
@@ -172,8 +162,9 @@ class SignUpAndLogIn : Fragment() {
                     val user = auth.currentUser
                     user?.displayName
                     activity?.getSharedPreferences("user_name", Context.MODE_PRIVATE);
-                    setUpSHaredPreference(user!!.displayName.toString())
-
+                    setUpSHaredPreference(user!!.displayName.toString(), activity!!)
+                    Navigation.findNavController(globalView)
+                        .navigate(R.id.action_signUpAndLogIn_to_chooseCategory)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
@@ -219,7 +210,12 @@ class SignUpAndLogIn : Fragment() {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithCredential:success")
                         val user = auth.currentUser
-                        setUpSHaredPreference(user?.displayName ?: "Anonymous")
+
+                        setUpSHaredPreference(user?.displayName ?: "Anonymous", it);
+
+
+                        Navigation.findNavController(globalView)
+                            .navigate(R.id.action_signUpAndLogIn_to_chooseCategory);
                         //                    updateUI(user)
                     } else {
 
@@ -237,27 +233,6 @@ class SignUpAndLogIn : Fragment() {
         }
     }
 
-    fun getUserDetails(): String? {
-
-        val userName = activity!!.getPreferences(Context.MODE_PRIVATE)
-            ?.getString(getString(R.string.user_name), null);
-
-        return userName
-    }
-
-    fun setUpSHaredPreference(user: String) {
-
-        Log.d(TAG, "set up shared preferences success $user ")
-
-        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
-        with(sharedPref.edit()) {
-            putString(getString(R.string.user_name), user)
-            commit()
-        }
-
-        Navigation.findNavController(globalView)
-            .navigate(R.id.action_signUpAndLogIn_to_chooseCategory);
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
