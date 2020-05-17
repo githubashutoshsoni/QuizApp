@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_quiz" >
         <action
             android:id="@+id/action_quizFragment_to_finalResult"
-            app:destination="@id/finalResult" />
+            app:destination="@id/finalResult"
+            app:popUpTo="@id/quizFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_quizFragment_self"
             app:destination="@id/quizFragment" />
@@ -49,7 +51,8 @@
         <action
             android:id="@+id/action_finalResult_to_chooseCategory"
             app:destination="@id/chooseCategory"
-            app:popUpTo="@id/chooseCategory"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/finalResult"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_finalResult_to_signUpAndLogIn"

@@ -38,7 +38,6 @@ class ChooseCategory : Fragment() {
         if (PrefHelper.getUserDetails(activity!!).isNullOrEmpty()) {
 
 
-
             Navigation.findNavController(view!!)
                 .navigate(R.id.action_chooseCategory_to_signUpAndLogIn)
 
@@ -69,6 +68,10 @@ class ChooseCategory : Fragment() {
                 )
             )
 
+            scroll_view.setOnScrollChangeListener { _, _, _, _, _ ->
+
+                header.isSelected = scroll_view.canScrollVertically(-1)
+            }
 
 
             if (activity is MainActivity) {
@@ -107,10 +110,10 @@ class ChooseCategory : Fragment() {
 
 
             when (id) {
-                R.id.entertainment_btn -> openTriviaApi.getResponseData(10)
+                R.id.entertainment_btn -> openTriviaApi.getResponseData(categoryId = 10)
                     .enqueue(ResponseBody())
-                R.id.sport_btn -> openTriviaApi.getResponseData(21).enqueue(ResponseBody())
-                R.id.myth_btn -> openTriviaApi.getResponseData(20).enqueue(ResponseBody())
+                R.id.sport_btn -> openTriviaApi.getResponseData(categoryId = 21).enqueue(ResponseBody())
+                R.id.myth_btn -> openTriviaApi.getResponseData(categoryId = 20).enqueue(ResponseBody())
             }
 
 

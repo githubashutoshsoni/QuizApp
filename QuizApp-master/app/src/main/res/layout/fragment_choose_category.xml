@@ -2,10 +2,12 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/header"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorPrimarySurface"
     android:fitsSystemWindows="true"
+    android:stateListAnimator="@animator/toolbar_elevator"
     android:theme="@style/QuizApp.Yellow"
     tools:context=".ChooseCategory">
 
@@ -14,8 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
-        android:theme="@style/ThemeOverlay.MyQuiz.Yellow"
-        app:elevation="0dp">
+        android:theme="@style/ThemeOverlay.MyQuiz.Yellow">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapasing_toolbar"
@@ -66,9 +67,9 @@
     <!-- TODO: Update blank fragment layout -->
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 

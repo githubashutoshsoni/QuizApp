@@ -20,9 +20,8 @@ class RestApi {
 
 
     init {
-        val retrofit = Retrofit.Builder().baseUrl("http://www.google.com")
+        val retrofit = Retrofit.Builder().baseUrl("https://opentdb.com/api.php/")
             .addConverterFactory(MoshiConverterFactory.create(moshi))
-
             .client(client)
             .build()
         openTriviaApi = retrofit.create(OpenTriviaApi::class.java)

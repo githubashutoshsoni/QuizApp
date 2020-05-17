@@ -20,6 +20,7 @@ import com.example.quizapp.model.ScoreModel
 import com.example.quizapp.recycleradapters.OptionsAdapter
 import io.realm.Realm
 import io.realm.kotlin.createObject
+import kotlinx.android.synthetic.main.fragment_choose_category.*
 import kotlinx.android.synthetic.main.fragment_quiz.view.*
 
 private const val ARG_PARAM1 = "param1"
@@ -116,6 +117,7 @@ class QuizFragment : Fragment() {
 
 
             user_name.text = getUserName()
+
             setRecyclerView(this)
 
 
@@ -216,6 +218,8 @@ class QuizFragment : Fragment() {
         val linearLayoutManager = LinearLayoutManager(context);
         optionsAdapter = OptionsAdapter()
         view.choice_recycler_view.adapter = optionsAdapter
+
+
         view.choice_recycler_view.layoutManager = linearLayoutManager
         optionsAdapter.onItemClick = {
             selectedAnswer = it
