@@ -31,14 +31,14 @@ import kotlinx.android.synthetic.main.fragment_sign_up_and_log_in.view.*
 /**
  * A simple [Fragment] subclass.
  */
-class SignUpAndLogIn : Fragment() {
+class SignUpAndLogInFragment : Fragment() {
 
 
     val callbackManager = CallbackManager.Factory.create();
     val EMAIL = "email"
 
 
-    val TAG = SignUpAndLogIn::class.java.simpleName
+    val TAG = SignUpAndLogInFragment::class.java.simpleName
 
     private lateinit var auth: FirebaseAuth
 // ...
@@ -73,7 +73,7 @@ class SignUpAndLogIn : Fragment() {
         globalView.apply {
 
             val facebookBtn = facebook_login_btn.apply {
-                fragment = this@SignUpAndLogIn
+                fragment = this@SignUpAndLogInFragment
                 setReadPermissions("email", "public_profile")
             }
 

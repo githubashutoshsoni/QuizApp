@@ -6,11 +6,17 @@ import android.view.*
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ContentLoadingProgressBar
+import androidx.dynamicanimation.animation.DynamicAnimation
+import androidx.dynamicanimation.animation.SpringAnimation
+import androidx.dynamicanimation.animation.SpringForce
+import androidx.dynamicanimation.animation.SpringForce.DAMPING_RATIO_LOW_BOUNCY
+import androidx.dynamicanimation.animation.SpringForce.STIFFNESS_LOW
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.quizapp.PrefHelper.clearLoginDetails
+import com.example.quizapp.Retrofit.RestApi
 import com.example.quizapp.model.ResponseCategoryJson
 import com.example.quizapp.model.ScoreModel
 import com.squareup.moshi.Moshi
@@ -24,7 +30,7 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Response
 
-class ChooseCategory : Fragment() {
+class ChooseCategoryFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +50,14 @@ class ChooseCategory : Fragment() {
         }
 
 
+    }
+
+
+    fun createSpringAnim(view: View, property: DynamicAnimation.ViewProperty): SpringAnimation {
+        return SpringAnimation(view, property).setSpring(SpringForce().apply {
+            stiffness = STIFFNESS_LOW
+            dampingRatio = DAMPING_RATIO_LOW_BOUNCY
+        })
     }
 
     lateinit var chooseCategoryViewModel: QuizViewModel
@@ -81,17 +95,46 @@ class ChooseCategory : Fragment() {
             }
 
 
+//            sport_btn.setOnClickListener {
+//                onClickCataegory(it.id)
+//            }
+//
+//            myth_btn.setOnClickListener {
+//                onClickCataegory(it.id)
+//            }
 
-            sport_btn.setOnClickListener {
-                onClickCataegory(it.id)
+
+            val firstXAnim = createSpringAnim(mat_btn_1, DynamicAnimation.X)
+            val firstYAnim = createSpringAnim(mat_btn_1, DynamicAnimation.Y)
+            val secondXAnim = createSpringAnim(content_progress_bar, DynamicAnimation.X)
+            val secondYAnim = createSpringAnim(content_progress_bar, DynamicAnimation.Y)
+
+            val viewYDistance = 0
+            var dX = 0f
+            var dY = 0f
+            drag_me.setOnTouchListener { view, event ->
+                when (event.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        dX = view.x - event.rawX
+                        dY = view.y - event.rawY
+                    }
+
+                    MotionEvent.ACTION_MOVE -> {
+                        val newX = event.rawX + dX
+                        val newY = event.rawY + dY
+
+                        view.animate().x(newX).y(newY).setDuration(0).start()
+                        firstXAnim.animateToFinalPosition(newX)
+                        firstYAnim.animateToFinalPosition(newY + viewYDistance)
+                    }
+                }
+
+                return@setOnTouchListener true
             }
 
-            myth_btn.setOnClickListener {
-                onClickCataegory(it.id)
-            }
+            mat_btn_1.setOnClickListener {
+//                onClickCataegory(it.id)
 
-            entertainment_btn.setOnClickListener {
-                onClickCataegory(it.id)
             }
 
 
@@ -110,10 +153,10 @@ class ChooseCategory : Fragment() {
 
 
             when (id) {
-                R.id.entertainment_btn -> openTriviaApi.getResponseData(categoryId = 10)
+                R.id.mat_btn_1 -> openTriviaApi.getResponseData(categoryId = 10)
                     .enqueue(ResponseBody())
-                R.id.sport_btn -> openTriviaApi.getResponseData(categoryId = 21).enqueue(ResponseBody())
-                R.id.myth_btn -> openTriviaApi.getResponseData(categoryId = 20).enqueue(ResponseBody())
+//                R.id.sport_btn -> openTriviaApi.getResponseData(categoryId = 21).enqueue(ResponseBody())
+//                R.id.myth_btn -> openTriviaApi.getResponseData(categoryId = 20).enqueue(ResponseBody())
             }
 
 
@@ -185,7 +228,7 @@ class ChooseCategory : Fragment() {
     }
 
 
-    val TAG = ChooseCategory::class.java.simpleName
+    val TAG = ChooseCategoryFragment::class.java.simpleName
 
     inner class ResponseBody : retrofit2.Callback<okhttp3.ResponseBody> {
 

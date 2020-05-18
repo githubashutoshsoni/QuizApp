@@ -9,7 +9,7 @@
     android:fitsSystemWindows="true"
     android:stateListAnimator="@animator/toolbar_elevator"
     android:theme="@style/QuizApp.Yellow"
-    tools:context=".ChooseCategory">
+    tools:context=".ChooseCategoryFragment">
 
 
     <com.google.android.material.appbar.AppBarLayout

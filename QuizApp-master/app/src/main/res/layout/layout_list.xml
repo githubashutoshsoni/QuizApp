@@ -4,17 +4,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout_list"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:stateListAnimator="@animator/topic_selection">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/entertainment_btn"
+        android:id="@+id/mat_btn_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp">
 
 
         <ImageView
+            android:id="@+id/img_view"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_gravity="center"
@@ -24,6 +25,19 @@
 
     </com.google.android.material.card.MaterialCardView>
 
+
+    <TextView
+        android:id="@+id/drag_me"
+        style="@style/TextAppearance.MyQuizApp.Headline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|end"
+        android:layout_margin="20dp"
+        android:text="Drag me"
+
+        >
+
+    </TextView>
 
     <androidx.core.widget.ContentLoadingProgressBar
         android:id="@+id/content_progress_bar"

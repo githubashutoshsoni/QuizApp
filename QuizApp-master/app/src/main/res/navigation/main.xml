@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpAndLogIn"
-        android:name="com.example.quizapp.SignUpAndLogIn"
+        android:name="com.example.quizapp.SignUpAndLogInFragment"
         android:label="fragment_sign_up_and_log_in"
         tools:layout="@layout/fragment_sign_up_and_log_in" >
         <action
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/chooseCategory"
-        android:name="com.example.quizapp.ChooseCategory"
+        android:name="com.example.quizapp.ChooseCategoryFragment"
         android:label="fragment_choose_category"
         tools:layout="@layout/fragment_choose_category" >
         <action

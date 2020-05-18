@@ -1,5 +1,6 @@
-package com.example.quizapp
+package com.example.quizapp.Retrofit
 
+import com.example.quizapp.QuizMoAdapter
 import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
