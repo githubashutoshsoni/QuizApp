@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  Copyright (c) 2019 Google Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+  in compliance with the License. You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software distributed under the License
+  is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+  or implied. See the License for the specific language governing permissions and limitations under
+  the License.
+  -->
+<resources>
+
+    <!--Base theme, all common styling here-->
+    <style name="Base.QuizApp" parent="@style/Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <!--Material shape attributes-->
+
+
+        <!--Material type attributes-->
+
+        <item name="textAppearanceHeadline1">@style/TextAppearance.MyQuizApp.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.MyQuizApp.Headline2</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.MyQuizApp.Headline3</item>
+        <item name="textAppearanceHeadline4">@style/TextAppearance.MyQuizApp.Headline4</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.MyQuizApp.Headline5</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.MyQuizApp.Headline6</item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.MyQuizApp.Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.MyQuizApp.Subtitle2</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.MyQuizApp.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.MyQuizApp.Body2</item>
+        <item name="textAppearanceButton">@style/TextAppearance.MyQuizApp.Button</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.MyQuizApp.Caption</item>
+        <item name="textAppearanceOverline">@style/TextAppearance.MyQuizApp.Overline</item>
+
+
+        <!--Material shape attributes-->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.MyQuiz.SmallComponent
+        </item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.MyQuizApp.MediumComponent
+        </item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.MyQuiz.LargeComponent
+        </item>
+
+
+        <!--        making the system bottom bar transparent and status bar transparent-->
+
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+
+    </style>
+
+    <style name="QuizApp" parent="@style/Base.QuizApp" />
+
+    <style name="QuizApp.Yellow">
+
+        <item name="colorPrimary">@color/colorPrimaryYellow</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryYellowDark</item>
+        <item name="colorAccent">@color/colorAccentYellow</item>
+
+
+        <item name="colorOnBackground">@color/colorOnBackground</item>
+
+
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
+
+        <item name="colorError">@color/colorError</item>
+        <item name="colorOnError">@color/colorOnError</item>
+
+
+    </style>
+
+
+    <style name="Widget.MyQuiz.Yellow.PopupMenu" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="colorSurface">@android:color/white</item>
+    </style>
+
+    <style name="ThemeOverlay.MyQuiz.Yellow" parent="@style/ThemeOverlay.MaterialComponents.ActionBar">
+        <item name="colorPrimary">@color/colorPrimaryYellow</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryYellowDark</item>
+        <item name="colorAccent">@color/colorAccentYellow</item>
+        <item name="colorOnPrimary">?attr/colorOnPrimarySurface</item>
+    </style>
+
+    <style name="QuizApp.Purple">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:textColorPrimary">@color/colorSurface</item>
+        <!--        <item name="android:colorBackground">@color/colorBackground</item>-->
+        <item name="colorOnBackground">@color/colorOnBackground</item>
+
+
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
+
+        <item name="colorError">@color/colorError</item>
+        <item name="colorOnError">@color/colorOnError</item>
+
+    </style>
+
+
+    <style name="Widget.MyQuiz.Purple.PopupMenu" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="colorSurface">@android:color/white</item>
+    </style>
+
+    <style name="ThemeOverlay.MyQuiz.Purple" parent="@style/ThemeOverlay.MaterialComponents.ActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorOnPrimary">#fff</item>
+    </style>
+
+
+</resources>
