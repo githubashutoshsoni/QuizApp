@@ -61,7 +61,6 @@ class QuizRepository(val context: Context) : CommonErrorModel() {
 
             if (response.isSuccessful) {
 
-//                Log.d(TAG, "response successful")
 
                 try {
                     val jsonString = response.body()?.string()
@@ -70,7 +69,6 @@ class QuizRepository(val context: Context) : CommonErrorModel() {
 
                     val jsonObject: JSONObject = JSONObject(jsonString!!)
                     val categoryString: JSONArray = jsonObject.getJSONArray("results")
-//                    Log.d(TAG, categoryString.toString())
 
                     val type =
                         Types.newParameterizedType(
@@ -86,16 +84,9 @@ class QuizRepository(val context: Context) : CommonErrorModel() {
                         adapter?.fromJson(categoryString.toString())
 
 
-//                    chooseCategoryViewModel.setQuizObject(arrayList as ArrayList<ResponseCategoryJson>);
 
-
-//                    Navigation.findNavController(view!!)
-//                        .navigate(R.id.action_chooseCategory_to_quizFragment)
                     _categoryList.value = arrayList as ArrayList<ResponseCategoryJson>
 
-                    Log.d("MainActivity", "categories are" + arrayList?.get(0)?.question)
-                    val body = "response.body()?.question"
-                    Log.d("MainActivity", "response of body is$body")
 
                 } catch (e: Exception) {
                     e.printStackTrace()

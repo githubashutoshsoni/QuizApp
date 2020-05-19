@@ -38,12 +38,10 @@ class QuizViewModel(app: Application) : AndroidViewModel(app) {
 
     }
 
-    //    private var question: LiveData<ResponseCategoryQuiz>
     private var _question: MutableLiveData<ResponseCategoryJson> = MutableLiveData(emptyLIst())
     var question: LiveData<ResponseCategoryJson> = _question
 
 
-    //    for saving the instance of quesiton position...
     fun setValueOfPosition(questionPos: Int) {
         i = questionPos
         _questionNumber.value = i

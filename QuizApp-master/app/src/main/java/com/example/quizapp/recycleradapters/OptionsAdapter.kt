@@ -63,9 +63,7 @@ class OptionsAdapter : RecyclerView.Adapter<OptionsAdapter.OptionsViewHolder>() 
                 0,
                 0
             )
-//            holder.checkBoxView.setBackgroundColor(
-//                ContextCompat.getColor(holder.checkBoxView.context, R.color.colorSurface)
-//            )
+
 
 
             holder.parentLayout.setBackgroundColor(
@@ -106,7 +104,6 @@ class OptionsAdapter : RecyclerView.Adapter<OptionsAdapter.OptionsViewHolder>() 
                 selectedOption = adapterPosition
 
 
-//              onItemClick?.invoke(choiceList?.get(adapterPosition))
 
 
                 choiceList?.get(adapterPosition)?.let { it1 -> onItemClick?.invoke(it1) };
