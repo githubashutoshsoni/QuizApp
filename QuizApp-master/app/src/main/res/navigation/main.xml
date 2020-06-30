@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    app:startDestination="@id/signUpAndLogIn">
+    app:startDestination="@id/finalResult">
 
     <fragment
         android:id="@+id/quizFragment"
@@ -47,6 +47,8 @@
             app:popUpTo="@id/signUpAndLogIn"
             app:popUpToInclusive="true" />
     </fragment>
+
+
     <fragment
         android:id="@+id/finalResult"
         android:name="com.example.quizapp.ui.ui.result.FinalResult"
@@ -71,4 +73,22 @@
         </argument>
 
     </fragment>
+
+
+    <dialog
+        android:id="@+id/rating_dialog"
+        android:name="com.example.quizapp.dialog.RateDialog">
+
+        <action android:id="@+id/dialog_to_chooseCategory">
+
+        </action>
+        <action
+            android:id="@+id/action_rating_dialog_to_chooseCategory"
+            app:destination="@id/chooseCategory"
+            app:popUpTo="@id/rating_dialog"
+            app:popUpToInclusive="true" />
+
+    </dialog>
+
+
 </navigation>

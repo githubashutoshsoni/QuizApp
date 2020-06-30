@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.ui.result.FinalResult">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/total_score"
         android:layout_width="match_parent"
@@ -24,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="96dp"
-        android:hint="Your name">
+        android:hint="@string/your_name">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -46,8 +45,8 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="top">
 
         </com.google.android.material.textfield.TextInputEditText>
 
@@ -86,7 +85,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_margin="32dp"
-        android:text="Log out">
+        android:text="@string/log_out">
 
     </com.google.android.material.button.MaterialButton>
 
@@ -97,7 +96,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="32dp"
-        android:text="Again">
+        android:text="@string/again">
 
     </com.google.android.material.button.MaterialButton>
 

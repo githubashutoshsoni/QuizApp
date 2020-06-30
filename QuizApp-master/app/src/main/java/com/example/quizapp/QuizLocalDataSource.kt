@@ -25,6 +25,10 @@ class QuizLocalDataSource internal constructor(
 
     }
 
+    override fun getMotivatingQuote() {
+        TODO("Not yet implemented")
+    }
+
     override fun deleteUser() {
 
     }

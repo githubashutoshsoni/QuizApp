@@ -7,7 +7,7 @@
     <string name="facebook_app_id">894393384417064</string>
     <string name="fb_login_protocol_scheme">fb894393384417064</string>
     <string name="user_name">user_name</string>
-    <string name="your_total_score_is_10_10">Your total score is 10/10</string>
+    <string name="your_total_score_is_10_10">Your total score is %1$d/10</string>
 
     <string name="no_internet">No internet</string>
     <string name="something_wrong">Something went wrong</string>
@@ -105,5 +105,8 @@
     <string name="submit">Submit</string>
     <string name="enter_your_feedback">Enter your feedback</string>
     <string name="name_desc_not_empty">Name and description can not be empty</string>
+    <string name="your_name">Your name</string>
+    <string name="again">Again</string>
+    <string name="log_out">Log out</string>
 
 </resources>

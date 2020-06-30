@@ -1,5 +1,7 @@
 package com.example.quizapp.ui.ui.result
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavArgs
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.quizapp.R
 import com.example.quizapp.getViewModelFactory
 import com.example.quizapp.ui.result.ResultViewModel
@@ -20,6 +24,9 @@ class FinalResult : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+
+    private val args: FinalResultArgs by navArgs()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -27,6 +34,7 @@ class FinalResult : Fragment() {
     }
 
     val finalViewModel by viewModels<ResultViewModel> { getViewModelFactory() }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,8 +61,13 @@ class FinalResult : Fragment() {
 
 
                 finalViewModel.submitFeedback(name, desc)
+                findNavController().navigate(R.id.rating_dialog)
+
+
             }
 
+            total_score.text =
+                context.getString(R.string.your_total_score_is_10_10, args.finalScore.toInt())
 
             log_out.setOnClickListener {
                 FirebaseAuth.getInstance().signOut()

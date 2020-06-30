@@ -2,6 +2,7 @@ package com.example.quizapp.ui.quiz
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -16,6 +17,7 @@ import com.example.quizapp.databinding.FragmentQuizBinding
 import com.example.quizapp.getViewModelFactory
 import com.example.quizapp.recycleradapters.OptionsAdapter
 import com.example.quizapp.util.EventObserver
+import com.google.android.material.snackbar.Snackbar
 
 
 class QuizFragment : Fragment() {
@@ -97,12 +99,16 @@ class QuizFragment : Fragment() {
             }
 
 
+            quizViewModel.correctAnwer.observe(viewLifecycleOwner, EventObserver {
+                Snackbar.make(view!!, "$it is the correct answer", Snackbar.LENGTH_SHORT).show()
+            })
+
+
             quizViewModel.finalScoreEvent.observe(viewLifecycleOwner,
                 EventObserver {
 
-                    val action = R.id.action_quizFragment_to_finalResult
+                    val action = QuizFragmentDirections.actionQuizFragmentToFinalResult(it)
                     findNavController().navigate(action)
-
                 })
 
 
@@ -115,7 +121,24 @@ class QuizFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
-        findNavController().popBackStack(R.id.chooseCategory, false)
+    }
+
+
+    fun immersiveMode() {
+        Handler().post {
+            activity?.window?.decorView?.systemUiVisibility = (
+                    View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            or View.SYSTEM_UI_FLAG_FULLSCREEN
+                            or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
+        }
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
     }
 
 
@@ -123,8 +146,9 @@ class QuizFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setUpToolBar()
         setRecyclerView()
-        quizViewModel.listOptions.observe(viewLifecycleOwner, Observer {
+        immersiveMode()
 
+        quizViewModel.listOptions.observe(viewLifecycleOwner, Observer {
             val list = it
             list?.let { value ->
                 run {

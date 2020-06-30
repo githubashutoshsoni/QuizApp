@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.quizapp.MainActivity
 import com.example.quizapp.R
+import com.example.quizapp.Retrofit.*
 
 import com.example.quizapp.database.Result
 import com.example.quizapp.databinding.FragmentChooseCategoryBinding
@@ -77,6 +78,11 @@ class ChooseCategoryFragment : Fragment() {
 
 
 
+
+
+
+
+
         categoryViewModel.startQuizEvent.observe(viewLifecycleOwner, EventObserver {
             Timber.d("$it")
 
@@ -98,11 +104,6 @@ class ChooseCategoryFragment : Fragment() {
         return viewDataBinding.root
     }
 
-    companion object {
-        val QUIZ_LIST = "Quiz List"
-    }
-
-    private val TAG = "ChooseCategoryFragment"
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 
@@ -115,8 +116,12 @@ class ChooseCategoryFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
+        removeImmersive()
+    }
 
 
+    fun removeImmersive() {
+        activity?.window?.decorView?.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
     }
 
 

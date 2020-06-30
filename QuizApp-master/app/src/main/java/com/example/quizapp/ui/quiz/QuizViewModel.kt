@@ -21,10 +21,6 @@ class QuizViewModel(repository: QuizRepository) : ViewModel() {
 
     val finalScoreEvent: LiveData<Event<String>> = _finalScoreEvent
 
-    fun selectedAnswer(selected: String) {
-        selected_options.value = selected
-    }
-
 
     private val resultQuiz: MutableLiveData<ResultQuiz> = MutableLiveData()
 
@@ -46,13 +42,17 @@ class QuizViewModel(repository: QuizRepository) : ViewModel() {
     private val _score: MutableLiveData<Int> = MutableLiveData(0)
 
     val score: LiveData<Int> = _score
+    val _correctAnswer: MutableLiveData<Event<String>> = MutableLiveData()
+    val correctAnwer: LiveData<Event<String>> = _correctAnswer
 
     fun checkAnswer(correct: String) {
-
-        if (correct == quizListItems[questionNumber].correct_answer) {
+        val correct_ans = quizListItems[questionNumber].correct_answer
+        if (correct == correct_ans) {
             var score: Int = _score.value ?: 0
             score += 1
             _score.value = score
+        } else {
+            _correctAnswer.value = Event(correct_ans)
         }
         onNextClicked()
     }
@@ -71,6 +71,7 @@ class QuizViewModel(repository: QuizRepository) : ViewModel() {
             resultQuiz.value = current
             _question.value = current.question
             _listOptions.value = current.incorrect_answers
+
 
         } else {
 
