@@ -40,9 +40,15 @@ android {
     }
 
     buildTypes {
+
+        debug {
+            buildConfigField "String", "GOOGLE_KEY", "\"196273572552-6gm31bgbl5032kbiqbb2fqs02d9r8erd.apps.googleusercontent.com\""
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "GOOGLE_KEY", "\"196273572552-6gm31bgbl5032kbiqbb2fqs02d9r8erd.apps.googleusercontent.com\""
         }
     }
 
@@ -103,7 +109,7 @@ dependencies {
 
     implementation "com.android.billingclient:billing:$billing_version"
     implementation "com.android.billingclient:billing-ktx:$billing_version"
-    
+
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
     implementation "com.airbnb.android:lottie:$lottieVersion"
