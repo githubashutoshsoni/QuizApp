@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<layout
+
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="androidx.core.content.ContextCompat" />
+
+        <variable
+            name="secondview"
+            type="com.example.quizapp.ui.ui.category.CategoryViewModel" />
+
+
+    </data>
+
+
+    <FrameLayout
+        android:id="@+id/layout_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/colorPrimarySurface"
+        android:theme="@style/QuizApp.Yellow">
+
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/content_progress_bar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/colorAccent"
+            android:elevation="14dp"
+            android:foregroundTint="@color/colorAccent"
+            android:visibility="gone">
+
+        </androidx.core.widget.ContentLoadingProgressBar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/entertainment_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:onClick="@{()-> secondview.fetchQuizItem(12)}">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center"
+
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/entertain">
+
+                    </ImageView>
+
+
+                </FrameLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/myth_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:onClick="@{()->secondview.fetchQuizItem(12)}">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/myth">
+
+                    </ImageView>
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/mythology"
+                        android:textAppearance="?attr/textAppearanceHeadline5">
+
+                    </TextView>
+
+                </FrameLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/sport_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:onClick="@{()->secondview.fetchQuizItem(13)}">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/sports">
+
+                    </ImageView>
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/sports"
+                        android:textAppearance="?attr/textAppearanceHeadline5">
+
+                    </TextView>
+
+                </FrameLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+
+</layout>
