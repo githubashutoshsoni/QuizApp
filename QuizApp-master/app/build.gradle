@@ -11,6 +11,11 @@ kapt {
 }
 
 
+def apikeyPropertiesFile = rootProject.file("apikey.properties")
+def apikeyProperties = new Properties()
+apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
+
+
 android {
 
     dataBinding {
@@ -42,13 +47,13 @@ android {
     buildTypes {
 
         debug {
-            buildConfigField "String", "GOOGLE_KEY", "\"196273572552-6gm31bgbl5032kbiqbb2fqs02d9r8erd.apps.googleusercontent.com\""
+            buildConfigField "String", "GOOGLE_KEY", apikeyProperties['GOOGLE_API_KEY']
         }
 
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "GOOGLE_KEY", "\"196273572552-6gm31bgbl5032kbiqbb2fqs02d9r8erd.apps.googleusercontent.com\""
+            buildConfigField "String", "GOOGLE_KEY", apikeyProperties['GOOGLE_API_KEY']
         }
     }
 
