@@ -15,7 +15,7 @@
 
         <variable
             name="secondview"
-            type="com.example.quizapp.ui.ui.category.CategoryViewModel" />
+            type="com.style.quiztrivia.ui.category.CategoryViewModel" />
 
 
     </data>

@@ -12,7 +12,7 @@
 
         <variable
             name="viewmodel"
-            type="com.example.quizapp.ui.ui.category.CategoryViewModel" />
+            type="com.style.quiztrivia.ui.category.CategoryViewModel" />
 
     </data>
 
@@ -26,7 +26,7 @@
         android:background="?attr/colorPrimarySurface"
         android:fitsSystemWindows="true"
         android:theme="@style/QuizApp.Yellow"
-        tools:context=".ui.ui.category.ChooseCategoryFragment">
+        tools:context="com.style.quiztrivia.ui.category.ChooseCategoryFragment">
 
 
         <com.google.android.material.appbar.AppBarLayout

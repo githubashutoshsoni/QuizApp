@@ -4,8 +4,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="facebook_app_id">894393384417064</string>
-    <string name="fb_login_protocol_scheme">fb894393384417064</string>
+
     <string name="user_name">user_name</string>
     <string name="your_total_score_is_10_10">Your total score is %1$d/10</string>
 
@@ -108,5 +107,7 @@
     <string name="your_name">Your name</string>
     <string name="again">Again</string>
     <string name="log_out">Log out</string>
+    <string name="less_than_zero">Entered Amount should be more than 0</string>
+    <string name="thanks_for_purchase">Thank you for purchasing! :)</string>
 
 </resources>

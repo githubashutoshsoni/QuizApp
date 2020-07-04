@@ -6,7 +6,7 @@
     <item
         android:id="@+id/delete_all_score"
         android:title="Delete All Score"
-        app:showAsAction="never"></item>
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/log_out"
@@ -15,5 +15,11 @@
 
     </item>
 
+
+    <item
+        android:id="@+id/donate"
+        android:title="Donate">
+
+    </item>
 
 </menu>

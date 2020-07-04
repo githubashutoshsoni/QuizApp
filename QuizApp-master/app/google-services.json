@@ -8,17 +8,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:196273572552:android:ca138947906cdf6817f3fd",
+        "mobilesdk_app_id": "1:196273572552:android:c02029a806b8b97d17f3fd",
         "android_client_info": {
-          "package_name": "com.example.quizapp"
+          "package_name": "com.style.quiztrivia"
         }
       },
       "oauth_client": [
         {
-          "client_id": "196273572552-3kcoi4mc90806u96lcforlpsbl23l4d0.apps.googleusercontent.com",
+          "client_id": "196273572552-5gsf0bdhkphqu0q79v70j947ausib4m4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.quizapp",
+            "package_name": "com.style.quiztrivia",
             "certificate_hash": "9b56ac19674d912f7632eaa7c15fd56da2c32783"
           }
         },

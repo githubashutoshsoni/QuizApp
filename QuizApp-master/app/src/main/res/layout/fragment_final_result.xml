@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.ui.result.FinalResult">
+    tools:context="com.style.quiztrivia.ui.result.FinalResult">
 
     <TextView
         android:id="@+id/total_score"

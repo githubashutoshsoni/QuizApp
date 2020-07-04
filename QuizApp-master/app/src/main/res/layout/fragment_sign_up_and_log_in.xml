@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.ui.onboard.SignUpAndLogInFragment">
+    tools:context="com.style.quiztrivia.ui.onboard.SignUpAndLogInFragment">
 
     <TextView
         style="@style/TextAppearance.MaterialComponents.Headline4"

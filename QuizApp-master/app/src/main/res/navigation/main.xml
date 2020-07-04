@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/quizFragment"
-        android:name="com.example.quizapp.ui.quiz.QuizFragment"
+        android:name="com.style.quiztrivia.ui.quiz.QuizFragment"
         android:label="fragment_quiz"
         tools:layout="@layout/fragment_quiz">
         <action
@@ -18,13 +18,16 @@
             app:destination="@id/quizFragment" />
         <argument
             android:name="result_quiz"
-            app:argType="com.example.quizapp.database.ResultQuiz[]" />
+            app:argType="com.style.quiztrivia.database.ResultQuiz[]" />
+        <action
+            android:id="@+id/action_quizFragment_to_donationFragment"
+            app:destination="@id/donationFragment" />
 
 
     </fragment>
     <fragment
         android:id="@+id/signUpAndLogIn"
-        android:name="com.example.quizapp.ui.ui.onboard.SignUpAndLogInFragment"
+        android:name="com.style.quiztrivia.ui.onboard.SignUpAndLogInFragment"
         android:label="fragment_sign_up_and_log_in"
         tools:layout="@layout/fragment_sign_up_and_log_in">
         <action
@@ -35,7 +38,7 @@
     </fragment>
     <fragment
         android:id="@+id/chooseCategory"
-        android:name="com.example.quizapp.ui.ui.category.ChooseCategoryFragment"
+        android:name="com.style.quiztrivia.ui.category.ChooseCategoryFragment"
         android:label="fragment_choose_category"
         tools:layout="@layout/fragment_choose_category">
         <action
@@ -46,12 +49,15 @@
             app:destination="@id/signUpAndLogIn"
             app:popUpTo="@id/signUpAndLogIn"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_chooseCategory_to_donationFragment"
+            app:destination="@id/donationFragment" />
     </fragment>
 
 
     <fragment
         android:id="@+id/finalResult"
-        android:name="com.example.quizapp.ui.ui.result.FinalResult"
+        android:name="com.style.quiztrivia.ui.result.FinalResult"
         android:label="fragment_final_result"
         tools:layout="@layout/fragment_final_result">
         <action
@@ -71,13 +77,16 @@
             app:nullable="false">
 
         </argument>
+        <action
+            android:id="@+id/action_finalResult_to_donationFragment"
+            app:destination="@id/donationFragment" />
 
     </fragment>
 
 
     <dialog
         android:id="@+id/rating_dialog"
-        android:name="com.example.quizapp.dialog.RateDialog">
+        android:name="com.style.quiztrivia.dialog.RateDialog">
 
         <action android:id="@+id/dialog_to_chooseCategory">
 
@@ -89,6 +98,10 @@
             app:popUpToInclusive="true" />
 
     </dialog>
+    <fragment
+        android:id="@+id/donationFragment"
+        android:name="com.style.quiztrivia.ui.donate.DonationFragment"
+        android:label="DonationFragment" />
 
 
 </navigation>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="androidx.core.content.ContextCompat" />
+
+
+        <variable
+            name="viewmodel"
+            type="com.style.quiztrivia.ui.donate.DonateViewModel" />
+
+    </data>
+
+    <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/colorPrimarySurface"
+        android:theme="@style/QuizApp.Yellow"
+        tools:context=".ui.donate.DonationFragment">
+
+
+        <TextView
+            android:id="@+id/amount_to_pay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/enter_amt"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="24dp"
+            android:gravity="center"
+            android:text="Amount to pay"
+            android:textAppearance="?attr/textAppearanceHeadline4" />
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:onClick="@{()-> viewmodel.proceedToCheckout( (enterAmt.getText().toString()) ) }"
+            android:src="@drawable/ic_arrow_forward"
+            android:translationY="50dp"
+            app:elevation="30dp"
+            app:fabCustomSize="100dp"
+            app:maxImageSize="50dp">
+
+        </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+        <EditText
+            android:id="@+id/enter_amt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/next"
+            android:layout_centerHorizontal="true"
+            android:layout_marginVertical="45dp"
+            android:background="@null"
+            android:drawableStart="@drawable/ic_rupee_indian"
+            android:drawableTint="?attr/colorSecondary"
+            android:inputType="number"
+            android:textSize="50sp"
+            android:textStyle="italic"
+            android:translationY="20dp"
+            tools:text="100">
+
+        </EditText>
+
+
+    </RelativeLayout>
+
+</layout>

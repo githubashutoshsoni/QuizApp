@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.quizapp">
 
+    package="com.style.quiztrivia">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.android.vending.BILLING" />
 
     <application
-        android:name=".QuizApplication"
-        android:allowBackup="true"
+        android:name="com.style.quiztrivia.QuizApplication"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/QuizApp.Purple">
+
+
+        <meta-data
+            android:name="com.razorpay.ApiKey"
+            android:value="rzp_test_q7n0lmVJ6VIGi0"
+            />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -38,7 +47,7 @@
         </activity>
 
 
-        <activity android:name="com.example.quizapp.MainActivity">
+        <activity android:name="com.style.quiztrivia.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -47,6 +56,5 @@
         </activity>
     </application>
 
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
