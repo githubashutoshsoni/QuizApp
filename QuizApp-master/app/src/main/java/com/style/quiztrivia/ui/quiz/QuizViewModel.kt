@@ -6,6 +6,7 @@ import com.style.quiztrivia.database.ResultQuiz
 import com.style.quiztrivia.database.UserModel
 import com.style.quiztrivia.util.AbsentLiveData
 import com.style.quiztrivia.util.Event
+import timber.log.Timber
 
 class QuizViewModel(repository: UserRepository) : ViewModel() {
 
@@ -42,13 +43,16 @@ class QuizViewModel(repository: UserRepository) : ViewModel() {
 
     var questionNumber = 0
 
-    var _questionNumber: MutableLiveData<Int> = MutableLiveData()
+    private val _progres: MutableLiveData<Int> = MutableLiveData(0)
 
+    val progress: LiveData<Int> = _progres
+
+
+    var _questionNumber: MutableLiveData<Int> = MutableLiveData()
 
     val _finalScoreEvent: MutableLiveData<Event<String>> = MutableLiveData()
 
     val finalScoreEvent: LiveData<Event<String>> = _finalScoreEvent
-
 
     private val resultQuiz: MutableLiveData<ResultQuiz> = MutableLiveData()
 
@@ -93,11 +97,13 @@ class QuizViewModel(repository: UserRepository) : ViewModel() {
         else
             ++questionNumber
 
-        _questionNumber.value = questionNumber
+        _questionNumber.value = questionNumber + 1
+        _progres.value = (((questionNumber.toDouble()) / questionLength) * 100).toInt()
+        Timber.d("  Progress ${_progres.value}")
 
         firstTime = false
 
-        if (questionNumber < quizListItems.size - 1) {
+        if (questionNumber < quizListItems.size) {
 
             val current = quizListItems[questionNumber]
             resultQuiz.value = current

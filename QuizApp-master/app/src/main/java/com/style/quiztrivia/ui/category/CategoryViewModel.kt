@@ -1,6 +1,7 @@
 package com.style.quiztrivia.ui.category
 
 import androidx.lifecycle.*
+import bolts.Bolts
 import com.style.quiztrivia.retrofit.RestApi
 import com.style.quiztrivia.database.ResponseModel
 import com.style.quiztrivia.database.Result
@@ -18,20 +19,22 @@ class CategoryViewModel(
 ) : ViewModel() {
 
 
+   private val _loadingData: MutableLiveData<Boolean> = MutableLiveData(false)
+    val loading: LiveData<Boolean> = _loadingData
+
     private val mutableQuizList: MutableLiveData<Result<ResponseModel>> = MutableLiveData()
 
     val quizList: LiveData<Result<ResponseModel>> = mutableQuizList
 
-   private val _startQuizEvent: MutableLiveData<Event<ArrayList<ResultQuiz>>> = MutableLiveData()
+    private val _startQuizEvent: MutableLiveData<Event<ArrayList<ResultQuiz>>> = MutableLiveData()
 
     val startQuizEvent: LiveData<Event<ArrayList<ResultQuiz>>> = _startQuizEvent
 
 
     fun fetchQuizItem(categoryId: Int) {
 
-
         appExecutors.networkIO().execute {
-
+            _loadingData.postValue(true)
             mutableQuizList.postValue(Result.Loading)
             try {
                 val response = restApi.quizApiService.getResponseData(9).execute()
@@ -91,6 +94,8 @@ class CategoryViewModel(
 
             } catch (e: Exception) {
                 mutableQuizList.postValue(Result.Error(e))
+            } finally {
+                _loadingData.postValue(false)
             }
 
         }

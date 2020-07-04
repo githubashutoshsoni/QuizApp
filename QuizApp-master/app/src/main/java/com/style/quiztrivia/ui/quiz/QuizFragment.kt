@@ -23,9 +23,6 @@ import com.style.quiztrivia.databinding.FragmentQuizBinding
 class QuizFragment : Fragment() {
 
 
-
-
-
     private val args: QuizFragmentArgs by navArgs()
 
     private val quizViewModel by viewModels<QuizViewModel> { getViewModelFactory() }
@@ -94,6 +91,9 @@ class QuizFragment : Fragment() {
             })
 
 
+            backButton.setOnClickListener {
+                findNavController().navigateUp()
+            }
 
             nextQuestionBtn.setOnClickListener {
                 quizViewModel.checkAnswer(selectedAnswer)

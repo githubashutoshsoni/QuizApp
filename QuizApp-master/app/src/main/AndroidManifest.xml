@@ -18,8 +18,7 @@
 
         <meta-data
             android:name="com.razorpay.ApiKey"
-            android:value="rzp_test_q7n0lmVJ6VIGi0"
-            />
+            android:value="@string/razor_pay_key_test" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -39,7 +38,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
@@ -48,9 +46,9 @@
         </activity>
 
 
-        <activity android:name="com.style.quiztrivia.MainActivity"
-            android:windowSoftInputMode="stateVisible"
-            >
+        <activity
+            android:name="com.style.quiztrivia.MainActivity"
+            android:windowSoftInputMode="stateVisible">
 
 
             <intent-filter>

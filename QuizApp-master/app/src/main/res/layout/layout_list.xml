@@ -38,7 +38,7 @@
             android:backgroundTint="@color/colorAccent"
             android:elevation="14dp"
             android:foregroundTint="@color/colorAccent"
-            android:visibility="gone">
+            android:visibility="@{secondview.loading ? View.VISIBLE : View.GONE}">
 
         </androidx.core.widget.ContentLoadingProgressBar>
 

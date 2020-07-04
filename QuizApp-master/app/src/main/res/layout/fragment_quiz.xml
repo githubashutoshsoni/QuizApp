@@ -114,7 +114,7 @@
                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:progress="50"
+                android:progress="@{viewmodel.progress}"
                 app:layout_constraintEnd_toEndOf="@id/end_guide_line"
                 app:layout_constraintStart_toStartOf="@id/start_guide_line"
                 app:layout_constraintTop_toBottomOf="@id/question_no">

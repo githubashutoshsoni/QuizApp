@@ -93,6 +93,7 @@
 
             <include
                 layout="@layout/layout_list"
+                android:id="@+id/layout_list"
                 bind:secondview="@{viewmodel}">
 
             </include>

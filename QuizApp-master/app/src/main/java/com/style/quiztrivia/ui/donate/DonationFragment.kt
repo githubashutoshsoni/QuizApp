@@ -17,6 +17,7 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
+import com.style.quiztrivia.MainActivity
 import com.style.quiztrivia.database.UserModel
 import com.style.quiztrivia.databinding.FragmentDonationBinding
 import com.style.quiztrivia.getViewModelFactory
@@ -28,7 +29,7 @@ import kotlinx.coroutines.launch
 import org.json.JSONObject
 import timber.log.Timber
 
-class DonationFragment : Fragment(), PaymentResultListener {
+class DonationFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,11 +49,6 @@ class DonationFragment : Fragment(), PaymentResultListener {
             viewmodel = donateViewModel
 
 
-            enterAmt.post {
-                enterAmt.requestFocus()
-                enterAmt.showKeyboard()
-            }
-
         }
         setupSnackbar()
 
@@ -65,9 +61,15 @@ class DonationFragment : Fragment(), PaymentResultListener {
         super.onViewCreated(view, savedInstanceState)
 
 
-        Checkout.preload(activity!!.applicationContext)
+
 
         binding.lifecycleOwner = viewLifecycleOwner
+
+        binding.enterAmt.post {
+            binding.enterAmt.requestFocus()
+            binding.enterAmt.showKeyboard()
+        }
+
 
         lifecycleScope.launch {
             donateViewModel.getUserDetails().observe(viewLifecycleOwner, Observer {
@@ -77,46 +79,14 @@ class DonationFragment : Fragment(), PaymentResultListener {
         }
 
         donateViewModel.checkoutLive.observe(viewLifecycleOwner, EventObserver { price ->
-            startPayment(price)
+
+            if (activity is MainActivity) {
+                (activity as MainActivity).startPayment(price, userDetails)
+            }
 
         })
 
 
-    }
-
-
-    private fun startPayment(money: Int = 10000) {
-        /*
-        *  You need to pass current activity in order to let Razorpay create CheckoutActivity
-        * */
-
-
-        val activity: Activity = requireActivity()
-        val co = Checkout()
-
-        try {
-            val options = JSONObject()
-//            todo get the name here
-            options.put("name", userDetails.userName)
-            options.put(
-                "description",
-                "It will help me develop more application and keep me motivated!"
-            )
-            //You can omit the image option to fetch the image from dashboard
-            options.put("image", "https://img.icons8.com/cute-clipart/64/000000/happy.png")
-            options.put("currency", "INR")
-            options.put("amount", money.toString())
-
-            val prefill = JSONObject()
-            prefill.put("email", userDetails.email)
-            prefill.put("contact", userDetails.mobileNumber)
-
-            options.put("prefill", prefill)
-            co.open(activity, options)
-        } catch (e: Exception) {
-            Toast.makeText(activity, "Error in payment: " + e.message, Toast.LENGTH_LONG).show()
-            e.printStackTrace()
-        }
     }
 
 
@@ -127,18 +97,6 @@ class DonationFragment : Fragment(), PaymentResultListener {
             Snackbar.LENGTH_SHORT
         )
 
-    }
-
-    override fun onPaymentError(p0: Int, p1: String?) {
-
-        Timber.e("onErrorpayments exe")
-        Toast.makeText(activity, "error $p0  $p1", Toast.LENGTH_LONG).show()
-
-    }
-
-    override fun onPaymentSuccess(p0: String?) {
-        Timber.e("Payment Successfull")
-        donateViewModel.successFullyPaid()
     }
 
 

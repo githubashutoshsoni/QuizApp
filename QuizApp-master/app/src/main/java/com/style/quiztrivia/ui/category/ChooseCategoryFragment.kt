@@ -24,11 +24,6 @@ import timber.log.Timber
 
 class ChooseCategoryFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     private val categoryViewModel by viewModels<CategoryViewModel> { getViewModelFactory() }
 
 
@@ -77,7 +72,11 @@ class ChooseCategoryFragment : Fragment() {
 
 
 
+        categoryViewModel.loading.observe(viewLifecycleOwner, Observer {
 
+            viewDataBinding.layoutList.layoutList.isEnabled = !it
+
+        })
 
 
 
