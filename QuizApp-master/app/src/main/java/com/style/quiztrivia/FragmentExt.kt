@@ -1,6 +1,9 @@
 package com.style.quiztrivia
 
+import android.content.Context
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
@@ -74,5 +77,20 @@ fun View.showSnackbar(snackbarText: String, timeLength: Int) {
         })
         show()
     }
+}
+
+
+fun EditText.showKeyboard() {
+
+    isFocusableInTouchMode = true
+    requestFocus()
+    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
+
+}
+
+fun EditText.hideKeyboard() {
+    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.hideSoftInputFromWindow(this.windowToken, 0)
 }
 

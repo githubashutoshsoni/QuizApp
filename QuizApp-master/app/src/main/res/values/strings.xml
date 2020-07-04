@@ -109,5 +109,6 @@
     <string name="log_out">Log out</string>
     <string name="less_than_zero">Entered Amount should be more than 0</string>
     <string name="thanks_for_purchase">Thank you for purchasing! :)</string>
+    <string name="anonymous">Anonymous</string>
 
 </resources>

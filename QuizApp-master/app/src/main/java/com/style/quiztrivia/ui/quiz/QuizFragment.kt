@@ -49,7 +49,7 @@ class QuizFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.donate -> findNavController().navigate(R.id.action_chooseCategory_to_donationFragment)
+            R.id.donate -> findNavController().navigate(R.id.action_quizFragment_to_donationFragment)
         }
 
         return super.onOptionsItemSelected(item)

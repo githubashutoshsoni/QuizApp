@@ -61,7 +61,9 @@
             android:background="@null"
             android:drawableStart="@drawable/ic_rupee_indian"
             android:drawableTint="?attr/colorSecondary"
+            android:focusable="true"
             android:inputType="number"
+
             android:textSize="50sp"
             android:textStyle="italic"
             android:translationY="20dp"

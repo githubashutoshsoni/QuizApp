@@ -28,6 +28,10 @@ class QuizRemoteDataSource internal constructor(
         TODO("Not yet implemented")
     }
 
+    override suspend fun getUser(): Result<UserModel> {
+        TODO("Not yet implemented")
+    }
+
     override fun deleteUser() {
         TODO("Not yet implemented")
     }

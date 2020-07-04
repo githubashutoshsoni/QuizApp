@@ -25,7 +25,7 @@ class DonateViewModel(private val repository: UserRepository) : ViewModel() {
 
 
 
-    fun getUserDetails(): LiveData<UserModel> {
+   suspend fun getUserDetails(): LiveData<UserModel> {
 
         val userModel: MutableLiveData<UserModel> = MutableLiveData()
 
