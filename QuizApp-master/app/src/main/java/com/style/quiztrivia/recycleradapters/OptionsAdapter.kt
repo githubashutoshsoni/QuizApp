@@ -1,6 +1,8 @@
 package com.style.quiztrivia.recycleradapters
 
 
+import android.animation.ObjectAnimator
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +11,7 @@ import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.style.quiztrivia.R
+import com.style.quiztrivia.disableViewDuringAnimation
 import kotlinx.android.synthetic.main.item_options_layout.view.*
 
 class OptionsAdapter : RecyclerView.Adapter<OptionsAdapter.OptionsViewHolder>() {
@@ -24,12 +27,24 @@ class OptionsAdapter : RecyclerView.Adapter<OptionsAdapter.OptionsViewHolder>() 
     }
 
     var selectedOption: Int = -1;
+    var flashCheckBoxes: Boolean = false;
+
+
+    fun setNoItemSelected() {
+        flashCheckBoxes = true;
+        notifyDataSetChanged()
+    }
 
 
     override fun onBindViewHolder(holder: OptionsViewHolder, position: Int) {
 
         holder.checkBoxView.text = choiceList?.get(position);
 
+
+        if (flashCheckBoxes) {
+            colorizeOrange(holder.parentLayout)
+            flashCheckBoxes = false
+        }
 
 
         if (position == selectedOption) {
@@ -123,6 +138,18 @@ class OptionsAdapter : RecyclerView.Adapter<OptionsAdapter.OptionsViewHolder>() 
         return this
     }
 
+    private fun colorizeOrange(view: View) {
 
+
+        var animator = ObjectAnimator.ofArgb(
+            view,
+            "backgroundColor", Color.WHITE, Color.CYAN
+        )
+        animator.setDuration(1000)
+        animator.repeatCount = 1
+        animator.repeatMode = ObjectAnimator.REVERSE
+        animator.disableViewDuringAnimation(view)
+        animator.start()
+    }
 }
 

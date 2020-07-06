@@ -18,6 +18,14 @@ apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
 
 android {
 
+    signingConfigs {
+        release {
+            storeFile file('C:\\Users\\Soni\\Documents\\quiz_app_keys\\first_key.jks')
+            storePassword 'pkra8949'
+            keyAlias 'smart_quiz'
+            keyPassword 'pkra8949'
+        }
+    }
     buildFeatures {
         dataBinding = true
     }
@@ -38,7 +46,7 @@ android {
         applicationId "com.style.quiztrivia"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 2
+        versionCode 3
         versionName "1.0"
         buildConfigField "String", "GOOGLE_KEY", apikeyProperties['GOOGLE_API_KEY']
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -49,6 +57,7 @@ android {
 
         release {
             minifyEnabled false
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

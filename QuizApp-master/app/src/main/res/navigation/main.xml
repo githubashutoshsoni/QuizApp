@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    app:startDestination="@id/signUpAndLogIn">
+    app:startDestination="@id/finalResult">
 
     <fragment
         android:id="@+id/quizFragment"
@@ -73,8 +73,9 @@
 
         <argument
             android:name="final_score"
+            android:defaultValue="10"
             app:argType="string"
-            app:nullable="false">
+            >
 
         </argument>
         <action

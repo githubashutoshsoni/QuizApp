@@ -122,6 +122,7 @@
             </androidx.core.widget.ContentLoadingProgressBar>
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/question_holder"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"

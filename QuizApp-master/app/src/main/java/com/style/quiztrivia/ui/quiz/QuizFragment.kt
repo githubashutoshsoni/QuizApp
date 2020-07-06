@@ -1,10 +1,11 @@
 package com.style.quiztrivia.ui.quiz
 
-import android.content.Context
+import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -18,6 +19,7 @@ import com.style.quiztrivia.util.EventObserver
 import com.google.android.material.snackbar.Snackbar
 import com.style.quiztrivia.R
 import com.style.quiztrivia.databinding.FragmentQuizBinding
+import com.style.quiztrivia.disableViewDuringAnimation
 
 
 class QuizFragment : Fragment() {
@@ -26,17 +28,6 @@ class QuizFragment : Fragment() {
     private val args: QuizFragmentArgs by navArgs()
 
     private val quizViewModel by viewModels<QuizViewModel> { getViewModelFactory() }
-
-
-//    fun getUserName(): String? {
-//
-//        val userName =
-//            activity?.getPreferences(Context.MODE_PRIVATE)
-//                ?.getString(resources.getString(R.string.user_name), "Anonymous");
-//
-//        return userName
-//
-//    }
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -99,11 +90,21 @@ class QuizFragment : Fragment() {
                 quizViewModel.checkAnswer(selectedAnswer)
             }
 
+            quizViewModel.correctScoreEvent.observe(viewLifecycleOwner, EventObserver {
+                colorizerGreen()
+            })
+
 
             quizViewModel.correctAnwer.observe(viewLifecycleOwner, EventObserver {
+                colorizeRed()
                 Snackbar.make(view!!, "$it is the correct answer", Snackbar.LENGTH_SHORT).show()
             })
 
+            quizViewModel.noOptionsSelected.observe(viewLifecycleOwner, EventObserver {
+                activity!!.runOnUiThread {
+                    optionsAdapter.setNoItemSelected()
+                }
+            })
 
             quizViewModel.finalScoreEvent.observe(viewLifecycleOwner,
                 EventObserver {
@@ -112,12 +113,65 @@ class QuizFragment : Fragment() {
                 })
 
 
+            quizViewModel.rotateEvent.observe(viewLifecycleOwner, EventObserver {
+                rotater()
+            })
+
         }
 
         // Inflate the layout for this fragment
         return dataBinding.root
     }
 
+    private fun colorizeRed() {
+
+
+        var animator = ObjectAnimator.ofArgb(
+            dataBinding.questionHolder,
+            "backgroundColor", Color.WHITE, Color.RED
+        )
+        animator.setDuration(1000)
+        animator.repeatCount = 1
+        animator.repeatMode = ObjectAnimator.REVERSE
+        animator.disableViewDuringAnimation(dataBinding.questionHolder)
+        animator.start()
+    }
+
+    fun colorizerGreen() {
+
+        // Animate the color of the star's container from black to red over a half
+        // second, then reverse back to black. Note that using a propertyName of
+        // "backgroundColor" will cause the animator to call the backgroundColor property
+        // (in Kotlin) or setBackgroundColor(int) (in Java).
+
+        var animator = ObjectAnimator.ofArgb(
+            dataBinding.questionHolder,
+            "backgroundColor", Color.WHITE, Color.GREEN
+        )
+        animator.setDuration(1000)
+        animator.repeatCount = 1
+        animator.repeatMode = ObjectAnimator.REVERSE
+        animator.disableViewDuringAnimation(dataBinding.questionHolder)
+        animator.start()
+    }
+
+    fun rotater() {
+
+        // Rotate the view for a second around its center once
+//        val scaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, -8f)
+//        val scaleY = PropertyValuesHolder.ofFloat(View.SCALE_Y, -8f)
+        val rotation = PropertyValuesHolder.ofFloat(View.ROTATION, -360f, 0f)
+
+        val animator = ObjectAnimator.ofPropertyValuesHolder(
+            dataBinding.questionHolder,
+            rotation
+        )
+
+        animator.duration = 500
+        animator.repeatCount = 0
+        animator.disableViewDuringAnimation(dataBinding.questionHolder)
+        animator.start()
+    }
 
     override fun onPause() {
         super.onPause()
@@ -163,9 +217,6 @@ class QuizFragment : Fragment() {
     }
 
     fun setRecyclerView() {
-//        val linearLayoutManager = GridLayoutManager(context, 2);
-
-
         val linearLayoutManager = LinearLayoutManager(context);
         optionsAdapter = OptionsAdapter()
         dataBinding.choiceRecyclerView.adapter = optionsAdapter

@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
@@ -31,7 +32,10 @@ import com.style.quiztrivia.BuildConfig
 import com.style.quiztrivia.R
 import com.style.quiztrivia.database.UserModel
 import com.style.quiztrivia.getViewModelFactory
+import kotlinx.android.synthetic.main.fragment_sign_up_and_log_in.*
 import kotlinx.android.synthetic.main.fragment_sign_up_and_log_in.view.*
+import kotlinx.android.synthetic.main.fragment_sign_up_and_log_in.view.facebook_login_btn
+import timber.log.Timber
 
 
 /**
@@ -132,6 +136,11 @@ class SignUpAndLogInFragment : Fragment() {
 
     val RC_SIGN_IN = 101;
 
+    fun showSignUpButton() {
+        facebook_login_btn.visibility = View.VISIBLE
+        google_sign_in.visibility = View.VISIBLE
+    }
+
     override fun onStart() {
         super.onStart()
 
@@ -139,9 +148,11 @@ class SignUpAndLogInFragment : Fragment() {
 
         viewmodel.userModel.observe(viewLifecycleOwner, Observer {
 
-            if (it.userName == getString(R.string.anonymous)) {
-
+            if (it?.userName == getString(R.string.anonymous) || it == null) {
+                showSignUpButton()
             } else {
+
+
                 Navigation.findNavController(globalView)
                     .navigate(R.id.action_signUpAndLogIn_to_chooseCategory)
 
@@ -189,18 +200,16 @@ class SignUpAndLogInFragment : Fragment() {
         try {
             val account = completedTask.getResult(ApiException::class.java)
 
-
-
-
             firebaseAuthWithGoogle(account?.idToken!!)
 
-
+            Timber.d("Handle sign in result success")
             // Signed in successfully, show authenticated UI.
 
         } catch (e: ApiException) {
+            Timber.e("Handle sign in result success")
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
-
+            e.printStackTrace()
         }
     }
 
@@ -223,36 +232,38 @@ class SignUpAndLogInFragment : Fragment() {
         }
     }
 
-    fun getUserDetails(): String? {
 
-        val userName = activity!!.getPreferences(Context.MODE_PRIVATE)
-            ?.getString(getString(R.string.user_name), null)
-
-        return userName
-    }
+//    fun getUserDetails(): String? {
+//
+//        val userName = activity!!.getPreferences(Context.MODE_PRIVATE)
+//            ?.getString(getString(R.string.user_name), null)
+//
+//        return userName
+//    }
 
     fun setUpUserDetails(user: FirebaseUser?) {
 
+        Timber.d("setting up user details")
 
         val name: String = user?.displayName.toString()
         val phone: String = user?.phoneNumber.toString()
         val email: String = user?.email.toString()
-
+        Timber.d("User details are string $phone $name $email")
         val usermodel: UserModel = UserModel(name, phone, email)
         viewmodel.setUpUserName(usermodel)
 
+        findNavController().navigate(R.id.action_signUpAndLogIn_to_chooseCategory)
 
-        Navigation.findNavController(globalView)
-            .navigate(R.id.action_signUpAndLogIn_to_chooseCategory);
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
-
+        Timber.d("On Activity result")
         if (requestCode == RC_SIGN_IN) {
             // The Task returned from this call is always completed, no need to attach
             // a listener.
 //            Log.d(TAG, "RC_SIGN_IN")
+            Timber.d("On requestCOde $RC_SIGN_IN")
             val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
             handleSignInResult(task)
         }

@@ -65,10 +65,6 @@ class DonationFragment : Fragment() {
 
         binding.lifecycleOwner = viewLifecycleOwner
 
-        binding.enterAmt.post {
-            binding.enterAmt.requestFocus()
-            binding.enterAmt.showKeyboard()
-        }
 
 
         lifecycleScope.launch {
@@ -89,6 +85,14 @@ class DonationFragment : Fragment() {
 
     }
 
+
+    override fun onResume() {
+        super.onResume()
+
+        binding.enterAmt.requestFocus()
+        binding.enterAmt.showKeyboard()
+
+    }
 
     private fun setupSnackbar() {
         view?.setupSnackbar(

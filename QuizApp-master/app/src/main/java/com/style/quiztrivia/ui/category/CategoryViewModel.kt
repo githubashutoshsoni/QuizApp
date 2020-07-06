@@ -2,6 +2,7 @@ package com.style.quiztrivia.ui.category
 
 import androidx.lifecycle.*
 import bolts.Bolts
+import com.google.firebase.auth.FirebaseAuth
 import com.style.quiztrivia.retrofit.RestApi
 import com.style.quiztrivia.database.ResponseModel
 import com.style.quiztrivia.database.Result
@@ -10,6 +11,7 @@ import com.style.quiztrivia.decodeUTF
 import com.style.quiztrivia.ui.quiz.UserRepository
 import com.style.quiztrivia.util.AppExecutors
 import com.style.quiztrivia.util.Event
+import kotlinx.coroutines.launch
 import java.lang.Exception
 
 class CategoryViewModel(
@@ -19,7 +21,7 @@ class CategoryViewModel(
 ) : ViewModel() {
 
 
-   private val _loadingData: MutableLiveData<Boolean> = MutableLiveData(false)
+    private val _loadingData: MutableLiveData<Boolean> = MutableLiveData(false)
     val loading: LiveData<Boolean> = _loadingData
 
     private val mutableQuizList: MutableLiveData<Result<ResponseModel>> = MutableLiveData()
@@ -29,6 +31,28 @@ class CategoryViewModel(
     private val _startQuizEvent: MutableLiveData<Event<ArrayList<ResultQuiz>>> = MutableLiveData()
 
     val startQuizEvent: LiveData<Event<ArrayList<ResultQuiz>>> = _startQuizEvent
+
+    private val _startDonationEvent: MutableLiveData<Event<Unit>> = MutableLiveData()
+    val startDonationEvent: LiveData<Event<Unit>> = _startDonationEvent
+
+    private val _startLogoutEvent: MutableLiveData<Event<Unit>> = MutableLiveData()
+
+    val startLogoutEvent: LiveData<Event<Unit>> = _startLogoutEvent
+
+    fun logout() {
+
+
+        viewModelScope.launch {
+
+            FirebaseAuth.getInstance().signOut()
+            userRepository.nukeDetails()
+            _startLogoutEvent.value = Event(Unit)
+        }
+    }
+
+    fun dontate() {
+        _startDonationEvent.value = Event(Unit)
+    }
 
 
     fun fetchQuizItem(categoryId: Int) {

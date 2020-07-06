@@ -1,5 +1,8 @@
 package com.style.quiztrivia
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -82,15 +85,34 @@ fun View.showSnackbar(snackbarText: String, timeLength: Int) {
 
 fun EditText.showKeyboard() {
 
-    isFocusableInTouchMode = true
-    requestFocus()
+//    isFocusableInTouchMode = true
+//
+//    requestFocus()
     val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
+    this.requestFocus()
+    imm.showSoftInput(this, 0)
+//    imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
 
 }
 
 fun EditText.hideKeyboard() {
     val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.hideSoftInputFromWindow(this.windowToken, 0)
+}
+
+ fun ObjectAnimator.disableViewDuringAnimation(view: View) {
+
+    // This extension method listens for start/end events on an animation and disables
+    // the given view for the entirety of that animation.
+
+    addListener(object : AnimatorListenerAdapter() {
+        override fun onAnimationStart(animation: Animator?) {
+            view.isEnabled = false
+        }
+
+        override fun onAnimationEnd(animation: Animator?) {
+            view.isEnabled = true
+        }
+    })
 }
 

@@ -16,7 +16,6 @@ import com.style.quiztrivia.MainActivity
 import com.style.quiztrivia.database.Result
 import com.style.quiztrivia.getViewModelFactory
 import com.style.quiztrivia.util.EventObserver
-import com.google.firebase.auth.FirebaseAuth
 import com.style.quiztrivia.R
 import com.style.quiztrivia.databinding.FragmentChooseCategoryBinding
 
@@ -81,7 +80,7 @@ class ChooseCategoryFragment : Fragment() {
 
 
         categoryViewModel.startQuizEvent.observe(viewLifecycleOwner, EventObserver {
-            Timber.d("$it")
+
 
             val action =
                 ChooseCategoryFragmentDirections.actionChooseCategoryToQuizFragment(it.toTypedArray())
@@ -92,6 +91,20 @@ class ChooseCategoryFragment : Fragment() {
 
         })
 
+
+        categoryViewModel.startLogoutEvent.observe(viewLifecycleOwner, EventObserver {
+
+            Toast.makeText(context, "Log out", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_chooseCategory_to_signUpAndLogIn)
+
+        })
+
+
+        categoryViewModel.startDonationEvent.observe(viewLifecycleOwner, EventObserver {
+
+            findNavController().navigate(R.id.action_chooseCategory_to_donationFragment)
+
+        })
 
 
 
@@ -114,6 +127,8 @@ class ChooseCategoryFragment : Fragment() {
 
         viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
         removeImmersive()
+
+
     }
 
 
@@ -125,23 +140,15 @@ class ChooseCategoryFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            R.id.delete_all_score -> {
-
-
-            }
-            R.id.log_out -> {
-
-
-                Toast.makeText(context, "Log out", Toast.LENGTH_SHORT).show()
-                FirebaseAuth.getInstance().signOut()
-                clearLoginDetails()
-                findNavController().navigate(R.id.action_chooseCategory_to_signUpAndLogIn)
-
-            }
 
             R.id.donate -> {
+                categoryViewModel.dontate()
+            }
 
-                findNavController().navigate(R.id.action_chooseCategory_to_donationFragment)
+            R.id.logout -> {
+
+                categoryViewModel.logout()
+
             }
         }
 

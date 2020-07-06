@@ -84,6 +84,20 @@
         </com.google.android.material.appbar.AppBarLayout>
 
 
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/content_progress_bar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/colorAccent"
+            android:elevation="14dp"
+            android:foregroundTint="@color/colorAccent"
+            android:visibility="@{viewmodel.loading ? View.VISIBLE : View.GONE}">
+
+        </androidx.core.widget.ContentLoadingProgressBar>
+
+
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

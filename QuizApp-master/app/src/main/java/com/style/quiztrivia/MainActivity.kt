@@ -4,9 +4,11 @@ import android.app.Activity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
 import com.style.quiztrivia.database.UserModel
+import okhttp3.Cache.Companion.key
 import org.json.JSONObject
 import timber.log.Timber
 
@@ -19,6 +21,17 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
         setContentView(R.layout.activity_main)
         Checkout.clearUserData(this)
         Checkout.preload(applicationContext)
+
+
+//        Checkout.Builder().setKeyId(resources.getString(R.string.razor_pay_key_live)).build()
+//        Timber.d("Live key")
+
+//        if (BuildConfig.DEBUG) {
+//            Checkout.Builder().setKeyId(resources.getString(R.string.razor_pay_key_test))
+//            Timber.d("Debug key")
+//        } else {
+//
+//        }
     }
 
 

@@ -18,7 +18,7 @@
 
         <meta-data
             android:name="com.razorpay.ApiKey"
-            android:value="@string/razor_pay_key_test" />
+            android:value="@string/razor_pay_key_live" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -38,6 +38,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 

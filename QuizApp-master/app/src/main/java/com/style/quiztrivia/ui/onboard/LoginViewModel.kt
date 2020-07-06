@@ -20,11 +20,11 @@ class LoginViewModel(private val repo: UserRepository) : ViewModel() {
 
     }
 
-    val userModel: LiveData<UserModel> = repo.observeUser().switchMap {
+    val userModel: LiveData<UserModel?> = repo.observeUser().switchMap {
         getUserDetails(it)
     }
 
-    fun getUserDetails(userResult: Result<UserModel>): LiveData<UserModel> {
+    fun getUserDetails(userResult: Result<UserModel>): LiveData<UserModel?> {
 
 
         val result = MutableLiveData<UserModel>()
