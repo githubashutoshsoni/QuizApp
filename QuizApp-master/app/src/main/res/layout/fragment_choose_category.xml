@@ -86,7 +86,7 @@
 
         <androidx.core.widget.ContentLoadingProgressBar
             android:id="@+id/content_progress_bar"
-            style="?android:attr/progressBarStyleLarge"
+            style="?android:attr/progressBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -105,12 +105,23 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
-            <include
-                layout="@layout/layout_list"
-                android:id="@+id/layout_list"
-                bind:secondview="@{viewmodel}">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/category_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="true"
+                app:items="@{viewmodel.list}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/layout_list">
 
-            </include>
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <!--            <include-->
+            <!--                layout="@layout/layout_list"-->
+            <!--                android:id="@+id/layout_list"-->
+            <!--                bind:secondview="@{viewmodel}">-->
+
+            <!--            </include>-->
 
 
         </androidx.core.widget.NestedScrollView>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="androidx.core.content.ContextCompat" />
+
+        <variable
+            name="viewmodel"
+            type="com.style.quiztrivia.ui.category.CategoryViewModel" />
+
+        <variable
+            name="category"
+            type="com.style.quiztrivia.database.CategoryModel" />
+
+    </data>
+
+
+    <FrameLayout
+        android:id="@+id/layout_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimarySurface"
+        android:theme="@style/QuizApp.Yellow">
+
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/content_progress_bar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:elevation="14dp"
+
+            android:visibility="@{viewmodel.loading ? View.VISIBLE : View.GONE}">
+
+        </androidx.core.widget.ContentLoadingProgressBar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/myth_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:onClick="@{()->viewmodel.fetchQuizItem(category.id)}">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/category_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:scaleType="centerCrop"
+                        app:imageUrl="@{category.imgResource}">
+
+                    </ImageView>
+
+                    <TextView
+                        android:id="@+id/category_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@{category.text}"
+                        android:textAppearance="?attr/textAppearanceHeadline5"
+                        android:textColor="@android:color/white"
+                        tools:text="Mythology">
+
+                    </TextView>
+
+                </FrameLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+
+</layout>

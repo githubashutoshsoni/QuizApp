@@ -3,6 +3,7 @@ package com.style.quiztrivia.ui.category
 import androidx.lifecycle.*
 import bolts.Bolts
 import com.google.firebase.auth.FirebaseAuth
+import com.style.quiztrivia.database.CategoryModel
 import com.style.quiztrivia.retrofit.RestApi
 import com.style.quiztrivia.database.ResponseModel
 import com.style.quiztrivia.database.Result
@@ -38,6 +39,29 @@ class CategoryViewModel(
     private val _startLogoutEvent: MutableLiveData<Event<Unit>> = MutableLiveData()
 
     val startLogoutEvent: LiveData<Event<Unit>> = _startLogoutEvent
+
+  private  val _list: MutableLiveData<List<CategoryModel>> = MutableLiveData()
+   val list = _list
+
+    init {
+        val list: List<CategoryModel> = mutableListOf(
+
+            CategoryModel("https://placeimg.com/500/500/knowledge", 9, "General Knowledge"),
+            CategoryModel("https://placeimg.com/500/500/Books", 10, "Entertainment Books"),
+            CategoryModel("https://placeimg.com/500/500/Television", 14, "Entertainment Television"),
+            CategoryModel("https://placeimg.com/500/500/Science", 17, "Science and Nature"),
+            CategoryModel("https://placeimg.com/500/500/Computers", 18, "Computers"),
+            CategoryModel("https://placeimg.com/500/500/Geography", 22, "Geography"),
+            CategoryModel("https://placeimg.com/500/500/History", 23, "History"),
+            CategoryModel("https://placeimg.com/500/500/Animals", 27, "Animals"),
+            CategoryModel("https://placeimg.com/500/500/Manga", 31, "Japanese Manga"),
+            CategoryModel("https://placeimg.com/500/500/Cartoon", 32, "Cartoon Animation"),
+            CategoryModel("https://placeimg.com/500/500/vehicles", 28, "Vehicles")
+
+        )
+        _list.postValue(list)
+    }
+
 
     fun logout() {
 

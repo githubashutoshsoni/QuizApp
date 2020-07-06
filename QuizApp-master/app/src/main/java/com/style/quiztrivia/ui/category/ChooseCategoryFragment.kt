@@ -18,6 +18,7 @@ import com.style.quiztrivia.getViewModelFactory
 import com.style.quiztrivia.util.EventObserver
 import com.style.quiztrivia.R
 import com.style.quiztrivia.databinding.FragmentChooseCategoryBinding
+import com.style.quiztrivia.recycleradapters.CategoryAdapter
 
 import timber.log.Timber
 
@@ -28,7 +29,6 @@ class ChooseCategoryFragment : Fragment() {
 
     private lateinit var viewDataBinding: FragmentChooseCategoryBinding
 
-    lateinit var progressDoalog: ContentLoadingProgressBar
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,8 +52,9 @@ class ChooseCategoryFragment : Fragment() {
 
             }
 
-
         }
+
+
 
 
         categoryViewModel.quizList.observe(viewLifecycleOwner, Observer {
@@ -73,7 +74,7 @@ class ChooseCategoryFragment : Fragment() {
 
         categoryViewModel.loading.observe(viewLifecycleOwner, Observer {
 
-            viewDataBinding.layoutList.layoutList.isEnabled = !it
+//            viewDataBinding.layoutList.layoutList.isEnabled = !it
 
         })
 
@@ -115,6 +116,22 @@ class ChooseCategoryFragment : Fragment() {
     }
 
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupListView();
+    }
+
+    lateinit var listAdapter: CategoryAdapter
+    fun setupListView() {
+        val viewModel = viewDataBinding.viewmodel
+        if (viewModel != null) {
+            listAdapter = CategoryAdapter(viewModel)
+            viewDataBinding.categoryRecycler.adapter = listAdapter
+        } else {
+            Timber.w("ViewModel not initialzed  when attempting to set up adapter")
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 
         inflater.inflate(R.menu.main, menu)
@@ -153,15 +170,6 @@ class ChooseCategoryFragment : Fragment() {
         }
 
         return super.onOptionsItemSelected(item)
-    }
-
-
-    fun clearLoginDetails() {
-        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
-        with(sharedPref.edit()) {
-            putString(getString(R.string.user_name), null)
-            commit()
-        }
     }
 
 
