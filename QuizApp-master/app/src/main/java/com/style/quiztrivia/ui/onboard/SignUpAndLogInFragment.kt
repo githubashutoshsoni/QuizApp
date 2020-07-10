@@ -39,11 +39,14 @@ import timber.log.Timber
 
 
 /**
- * A simple [Fragment] subclass.
+ * A simple [Fragment] subclass. handles sign up of users with facebook and google
  */
 class SignUpAndLogInFragment : Fragment() {
 
 
+    /**
+     * a [callbackManager] to get the status response from facebook
+     */
     val callbackManager = CallbackManager.Factory.create();
 
 
@@ -141,10 +144,12 @@ class SignUpAndLogInFragment : Fragment() {
         google_sign_in.visibility = View.VISIBLE
     }
 
+    /**
+     * checking from the database if there are no users signed up then stay to this fragment
+     * . or else proceed to [com.style.quiztrivia.ui.category.ChooseCategoryFragment]
+     */
     override fun onStart() {
         super.onStart()
-
-
 
         viewmodel.userModel.observe(viewLifecycleOwner, Observer {
 
@@ -164,11 +169,10 @@ class SignUpAndLogInFragment : Fragment() {
     }
 
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-    }
+    /**
+     *[handleFacebookAccessToken] logging users based on the authentication
+     *  with access token from facebook called when access token results is success
+     */
 
     private fun handleFacebookAccessToken(token: AccessToken) {
 

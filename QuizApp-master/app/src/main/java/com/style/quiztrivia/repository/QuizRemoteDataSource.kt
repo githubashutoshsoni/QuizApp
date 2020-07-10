@@ -4,10 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
 import com.style.quiztrivia.database.ResponseModel
-import com.style.quiztrivia.database.Result
+import com.style.quiztrivia.util.Result
 import com.style.quiztrivia.database.UserModel
-import com.style.quiztrivia.ui.quiz.UserRepository
-import com.style.quiztrivia.util.AbsentLiveData
 import com.style.quiztrivia.retrofit.RestApi
 import com.style.quiztrivia.util.AppExecutors
 import kotlinx.coroutines.CoroutineDispatcher

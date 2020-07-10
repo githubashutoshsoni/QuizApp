@@ -2,7 +2,7 @@ package com.style.quiztrivia
 
 import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
-import com.style.quiztrivia.ui.quiz.UserRepository
+import com.style.quiztrivia.repository.UserRepository
 import com.style.quiztrivia.util.ServiceLocator
 
 import timber.log.Timber

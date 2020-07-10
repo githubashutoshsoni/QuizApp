@@ -23,17 +23,13 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
         Checkout.preload(applicationContext)
 
 
-//        Checkout.Builder().setKeyId(resources.getString(R.string.razor_pay_key_live)).build()
-//        Timber.d("Live key")
 
-//        if (BuildConfig.DEBUG) {
-//            Checkout.Builder().setKeyId(resources.getString(R.string.razor_pay_key_test))
-//            Timber.d("Debug key")
-//        } else {
-//
-//        }
     }
 
+  /*
+  start the payment. If @{money
+
+   */
 
     fun startPayment(money: Int = 10000, userDetails: UserModel) {
         /*
@@ -46,7 +42,6 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
 
         try {
             val options = JSONObject()
-//            todo get the name here
             options.put("name", userDetails.userName)
             options.put(
                 "description",

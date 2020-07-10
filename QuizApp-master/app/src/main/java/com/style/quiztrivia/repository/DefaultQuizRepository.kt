@@ -2,10 +2,8 @@ package com.style.quiztrivia.repository
 
 import androidx.lifecycle.LiveData
 
-import com.style.quiztrivia.database.ResponseModel
-import com.style.quiztrivia.database.Result
+import com.style.quiztrivia.util.Result
 import com.style.quiztrivia.database.UserModel
-import com.style.quiztrivia.ui.quiz.UserRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 

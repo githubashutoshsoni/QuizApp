@@ -2,18 +2,17 @@ package com.style.quiztrivia.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
-import com.style.quiztrivia.database.Result
+import com.style.quiztrivia.util.Result
 
 import com.style.quiztrivia.database.UserModel
 
 import com.style.quiztrivia.database.dao.ScoreDao
 import com.style.quiztrivia.database.dao.UserDao
-import com.style.quiztrivia.ui.quiz.UserRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
-import com.style.quiztrivia.database.Result.Success
+import com.style.quiztrivia.util.Result.Success
 import java.lang.Exception
 
 class QuizLocalDataSource internal constructor(

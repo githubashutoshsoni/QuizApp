@@ -15,7 +15,8 @@
             app:destination="@id/finalResult" />
         <action
             android:id="@+id/action_quizFragment_self"
-            app:destination="@id/quizFragment" />
+            app:destination="@id/quizFragment"
+            app:launchSingleTop="true" />
         <argument
             android:name="result_quiz"
             app:argType="com.style.quiztrivia.database.ResultQuiz[]" />
@@ -43,7 +44,8 @@
         tools:layout="@layout/fragment_choose_category">
         <action
             android:id="@+id/action_chooseCategory_to_quizFragment"
-            app:destination="@id/quizFragment" />
+            app:destination="@id/quizFragment"
+            app:launchSingleTop="true" />
         <action
             android:id="@+id/action_chooseCategory_to_signUpAndLogIn"
             app:destination="@id/signUpAndLogIn"

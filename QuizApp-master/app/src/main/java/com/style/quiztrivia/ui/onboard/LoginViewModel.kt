@@ -1,10 +1,9 @@
 package com.style.quiztrivia.ui.onboard
 
 import androidx.lifecycle.*
-import com.style.quiztrivia.database.Result
+import com.style.quiztrivia.util.Result
 import com.style.quiztrivia.database.UserModel
-import com.style.quiztrivia.ui.quiz.UserRepository
-import com.style.quiztrivia.util.AbsentLiveData
+import com.style.quiztrivia.repository.UserRepository
 import kotlinx.coroutines.launch
 
 class LoginViewModel(private val repo: UserRepository) : ViewModel() {

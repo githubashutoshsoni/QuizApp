@@ -15,11 +15,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "196273572552-5gsf0bdhkphqu0q79v70j947ausib4m4.apps.googleusercontent.com",
+          "client_id": "196273572552-im77j2spirv1ti8un9jqu0of6h74j87a.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.style.quiztrivia",
             "certificate_hash": "9b56ac19674d912f7632eaa7c15fd56da2c32783"
+          }
+        },
+        {
+          "client_id": "196273572552-lnbc8jt0vtvj1iprha199cstjgteul8j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.style.quiztrivia",
+            "certificate_hash": "9c8e14c2bdde2d04b56c77ad1647f8cd509faecb"
           }
         },
         {

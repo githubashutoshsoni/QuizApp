@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.style.quiztrivia.database.CategoryModel
 import com.style.quiztrivia.databinding.ItemCategoryBinding
-import com.style.quiztrivia.databinding.LayoutListBinding
 import com.style.quiztrivia.recycleradapters.CategoryAdapter.ViewHolder
 import com.style.quiztrivia.ui.category.CategoryViewModel
+
 
 class CategoryAdapter(private val viewmodel: CategoryViewModel) :
     ListAdapter<CategoryModel, ViewHolder>(SimpleCategoryDiffUtil()) {

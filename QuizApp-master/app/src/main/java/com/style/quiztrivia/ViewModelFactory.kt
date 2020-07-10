@@ -7,7 +7,7 @@ import com.style.quiztrivia.ui.category.CategoryViewModel
 import com.style.quiztrivia.ui.donate.DonateViewModel
 import com.style.quiztrivia.ui.onboard.LoginViewModel
 import com.style.quiztrivia.ui.result.ResultViewModel
-import com.style.quiztrivia.ui.quiz.UserRepository
+import com.style.quiztrivia.repository.UserRepository
 import com.style.quiztrivia.ui.quiz.QuizViewModel
 import com.style.quiztrivia.util.AppExecutors
 

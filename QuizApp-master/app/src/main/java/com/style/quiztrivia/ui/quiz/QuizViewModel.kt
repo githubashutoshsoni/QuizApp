@@ -1,9 +1,10 @@
 package com.style.quiztrivia.ui.quiz
 
 import androidx.lifecycle.*
-import com.style.quiztrivia.database.Result
+import com.style.quiztrivia.util.Result
 import com.style.quiztrivia.database.ResultQuiz
 import com.style.quiztrivia.database.UserModel
+import com.style.quiztrivia.repository.UserRepository
 import com.style.quiztrivia.util.Event
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

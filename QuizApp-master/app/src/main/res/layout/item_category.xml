@@ -28,18 +28,6 @@
         android:theme="@style/QuizApp.Yellow">
 
 
-        <androidx.core.widget.ContentLoadingProgressBar
-            android:id="@+id/content_progress_bar"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:elevation="14dp"
-
-            android:visibility="@{viewmodel.loading ? View.VISIBLE : View.GONE}">
-
-        </androidx.core.widget.ContentLoadingProgressBar>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -51,6 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
+                android:clickable="@{!viewmodel.loading}"
                 android:onClick="@{()->viewmodel.fetchQuizItem(category.id)}">
 
                 <FrameLayout
@@ -87,6 +76,19 @@
 
         </LinearLayout>
 
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/content_progress_bar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/colorAccent"
+            android:elevation="14dp"
+            android:foregroundTint="@color/colorAccent"
+            android:visibility="@{viewmodel.loading ? View.VISIBLE : View.GONE}">
+
+        </androidx.core.widget.ContentLoadingProgressBar>
 
     </FrameLayout>
 

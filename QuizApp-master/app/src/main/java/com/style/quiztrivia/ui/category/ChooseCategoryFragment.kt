@@ -1,11 +1,9 @@
 package com.style.quiztrivia.ui.category
 
-import android.content.Context
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.widget.ContentLoadingProgressBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -13,7 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.style.quiztrivia.MainActivity
 
-import com.style.quiztrivia.database.Result
+import com.style.quiztrivia.util.Result
 import com.style.quiztrivia.getViewModelFactory
 import com.style.quiztrivia.util.EventObserver
 import com.style.quiztrivia.R
@@ -57,6 +55,7 @@ class ChooseCategoryFragment : Fragment() {
 
 
 
+
         categoryViewModel.quizList.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Result.Loading -> Timber.d("Loading")
@@ -74,7 +73,7 @@ class ChooseCategoryFragment : Fragment() {
 
         categoryViewModel.loading.observe(viewLifecycleOwner, Observer {
 
-//            viewDataBinding.layoutList.layoutList.isEnabled = !it
+//            listAdapter.
 
         })
 
@@ -119,13 +118,17 @@ class ChooseCategoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupListView();
+        viewDataBinding.root.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                // Tells the system that the window wishes the content to
+                // be laid out as if the navigation bar was hidden
+                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
     }
 
     lateinit var listAdapter: CategoryAdapter
     fun setupListView() {
         val viewModel = viewDataBinding.viewmodel
         if (viewModel != null) {
-            listAdapter = CategoryAdapter(viewModel)
+            listAdapter = CategoryAdapter(categoryViewModel)
             viewDataBinding.categoryRecycler.adapter = listAdapter
         } else {
             Timber.w("ViewModel not initialzed  when attempting to set up adapter")

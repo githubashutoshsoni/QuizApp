@@ -2,12 +2,10 @@ package com.style.quiztrivia.ui.donate
 
 import androidx.lifecycle.*
 import com.style.quiztrivia.R
-import com.style.quiztrivia.database.Result
+import com.style.quiztrivia.util.Result
 import com.style.quiztrivia.database.UserModel
-import com.style.quiztrivia.ui.quiz.UserRepository
+import com.style.quiztrivia.repository.UserRepository
 import com.style.quiztrivia.util.Event
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 class DonateViewModel(private val repository: UserRepository) : ViewModel() {
